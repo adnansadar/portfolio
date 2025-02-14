@@ -11,8 +11,8 @@ const projects = [
     description:
       "Built an investment research platform for users that displays financial data for 5000+ US stocks, accurate 10-year historical ratios, and advanced charting tools. The product roadmap also involves creating a personalized portfolio and watchlist management using a dashboard.",
     techStack: ["Next.js", "TypeScript", "React Query", "Redux", "Material UI"],
-    github: "https://github.com/adnansadar/investors-engine",
-    live: "https://investors-engine.vercel.app",
+    github: "",
+    live: "https://investorsengine.com/",
     period: "May 2024 - Ongoing",
   },
   {
@@ -20,8 +20,8 @@ const projects = [
     description:
       "Built a cryptocurrency tracking app using React and CoinGecko API, enabling users to monitor prices, market cap, and volume for 20+ cryptocurrencies.",
     techStack: ["React", "CoinGecko API", "Tailwind CSS", "Chart.js"],
-    github: "https://github.com/adnansadar/crypto-portfolio",
-    live: "https://crypto-portfolio-tracker.vercel.app",
+    github: "https://github.com/adnansadar/Cryptocurrency-Price-Tracker",
+    live: "https://my-cryptotracker.netlify.app/",
     period: "January 2021 - April 2021",
   },
 ];
@@ -73,19 +73,27 @@ export default function Projects() {
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-2xl font-semibold">{project.title}</h3>
                     <div className="flex gap-3">
-                      <Link
-                        href={project.github}
-                        target="_blank"
-                        className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
-                      >
-                        <FontAwesomeIcon icon={faGithub} className="w-5 h-5" />
-                      </Link>
+                      {project.github && (
+                        <Link
+                          href={project.github}
+                          target="_blank"
+                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                        >
+                          <FontAwesomeIcon
+                            icon={faGithub}
+                            className="w-5 h-5"
+                          />
+                        </Link>
+                      )}
                       <Link
                         href={project.live}
                         target="_blank"
                         className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
                       >
-                        <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-5 h-5" />
+                        <FontAwesomeIcon
+                          icon={faArrowUpRightFromSquare}
+                          className="w-5 h-5"
+                        />
                       </Link>
                     </div>
                   </div>
