@@ -34,15 +34,15 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+    <footer className="border-t border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Brand Section */}
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-blue-600 dark:text-blue-400">
               Adnan Sadar
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 max-w-sm">
+            <p className="max-w-sm text-gray-600 dark:text-gray-400">
               Front-End Web Developer specializing in building exceptional
               digital experiences.
             </p>
@@ -58,9 +58,12 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1"
+                    className="flex items-center gap-1 text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
                   >
-                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-4 h-4" />
+                    <FontAwesomeIcon
+                      icon={faArrowUpRightFromSquare}
+                      className="h-4 w-4"
+                    />
                     {link.name}
                   </Link>
                 </li>
@@ -80,18 +83,22 @@ export default function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  aria-label={link.name}
+                  className="text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                  aria-label={`Connect with me on ${link.name}`}
                 >
-                  <FontAwesomeIcon icon={link.icon} className="w-5 h-5" />
+                  <FontAwesomeIcon
+                    icon={link.icon}
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  />
                 </Link>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
-          <div className="text-center text-gray-600 dark:text-gray-400 text-sm">
+        <div className="mt-8 border-t border-gray-200 pt-8 dark:border-gray-800">
+          <div className="text-center text-sm text-gray-600 dark:text-gray-400">
             © {currentYear} Adnan Sadar. All rights reserved.
           </div>
         </div>

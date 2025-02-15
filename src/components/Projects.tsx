@@ -46,67 +46,73 @@ const itemVariants = {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="projects" className="bg-gray-50 py-20 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
-          className="max-w-6xl mx-auto"
+          className="mx-auto max-w-6xl"
         >
           <motion.h2
             variants={itemVariants}
-            className="text-4xl font-bold text-center mb-12"
+            className="mb-12 text-center text-4xl font-bold"
           >
             Featured Projects
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {projects.map((project) => (
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                className="overflow-hidden rounded-lg bg-white shadow-lg transition-shadow hover:shadow-xl dark:bg-gray-800"
               >
                 <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
+                  <div className="mb-4 flex items-start justify-between">
                     <h3 className="text-2xl font-semibold">{project.title}</h3>
                     <div className="flex gap-3">
                       {project.github && (
                         <Link
                           href={project.github}
                           target="_blank"
-                          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                          rel="noopener noreferrer"
+                          className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                          aria-label={`View ${project.title} source code on GitHub`}
                         >
                           <FontAwesomeIcon
                             icon={faGithub}
-                            className="w-5 h-5"
+                            className="h-5 w-5"
+                            aria-hidden="true"
                           />
                         </Link>
                       )}
                       <Link
                         href={project.live}
                         target="_blank"
-                        className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+                        rel="noopener noreferrer"
+                        className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                        aria-label={`Visit ${project.title} live site`}
                       >
                         <FontAwesomeIcon
                           icon={faArrowUpRightFromSquare}
-                          className="w-5 h-5"
+                          className="h-5 w-5"
+                          aria-hidden="true"
                         />
                       </Link>
                     </div>
                   </div>
 
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                  <p className="mb-4 text-gray-600 dark:text-gray-300">
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="mb-4 flex flex-wrap gap-2">
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 rounded-full"
+                        className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700 dark:bg-blue-900 dark:text-blue-200"
                       >
                         {tech}
                       </span>

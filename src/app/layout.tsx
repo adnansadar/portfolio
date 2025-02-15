@@ -1,18 +1,58 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
+import JsonLd from "@/components/JsonLd";
 
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
 
-const inter = Inter({ subsets: ["latin"] });
-
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 export const metadata: Metadata = {
   title: "Adnan Sadar - Software Engineer",
-  description: "Front-End Web Developer with expertise in React and Next.js",
+  description:
+    "Front-End Web Developer with expertise in React and Next.js, specializing in building modern, responsive web applications with cutting-edge technologies.",
+  keywords: [
+    "software engineer",
+    "front-end developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "web development",
+  ],
+  authors: [{ name: "Adnan Sadar" }],
+  creator: "Adnan Sadar",
+  publisher: "Adnan Sadar",
+  robots: "index, follow",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://adnansadar.com",
+    title: "Adnan Sadar - Software Engineer",
+    description:
+      "Front-End Web Developer with expertise in React and Next.js, specializing in building modern, responsive web applications.",
+    siteName: "Adnan Sadar Portfolio",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Adnan Sadar - Software Engineer",
+      },
+    ],
+  },
+
+  // verification: {
+  //   google: "your-google-site-verification", // You'll need to add your verification code
+  // },
+  alternates: {
+    canonical: "https://adnansadar.com",
+  },
 };
 
 export default function RootLayout({
@@ -22,7 +62,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={poppins.className}>
+        <JsonLd />
         <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
       </body>
     </html>

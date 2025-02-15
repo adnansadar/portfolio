@@ -20,13 +20,13 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-      aria-label="Toggle theme"
+      className="rounded-lg bg-gray-200 p-2 transition-colors hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
     >
       {theme === "dark" ? (
-        <FontAwesomeIcon icon={faSun} className="w-5 h-5" />
+        <FontAwesomeIcon icon={faSun} className="h-5 w-5" aria-hidden="true" />
       ) : (
-        <FontAwesomeIcon icon={faMoon} className="w-5 h-5" />
+        <FontAwesomeIcon icon={faMoon} className="h-5 w-5" aria-hidden="true" />
       )}
     </button>
   );

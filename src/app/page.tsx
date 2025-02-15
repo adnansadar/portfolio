@@ -9,10 +9,11 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+    <div className="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
       <Head>
         <title>Adnan Sadar | Portfolio</title>
         <meta name="description" content="Portfolio of Adnan Sadar" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
