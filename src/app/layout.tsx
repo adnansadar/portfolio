@@ -5,6 +5,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 import JsonLd from "@/components/JsonLd";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
@@ -65,6 +66,7 @@ export default function RootLayout({
       <body className={poppins.className}>
         <JsonLd />
         <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
+        <SpeedInsights />
       </body>
     </html>
   );
