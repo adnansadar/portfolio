@@ -1,9 +1,0 @@
-{
-  "redirects": [
-    {
-      "source": "https://adnansadar.netlify.app/:path*",
-      "destination": "https://adnansadar.com/:path*",
-      "permanent": true
-    }
-  ]
-}
