@@ -7,7 +7,7 @@ import ThemeProviderWrapper from "@/components/ThemeProviderWrapper";
 import JsonLd from "@/components/JsonLd";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
-
+import { Analytics } from "@vercel/analytics/react";
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
 
@@ -71,6 +71,7 @@ export default function RootLayout({
         />
         <JsonLd />
         <ThemeProviderWrapper>{children}</ThemeProviderWrapper>
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
