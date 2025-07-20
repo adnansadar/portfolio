@@ -7,9 +7,9 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const roles = [
-  "Software Engineer",
-  "Frontend Developer",
-  "React & Next.js Enthusiast",
+  "Lead Frontend Engineer",
+  "Product Engineer",
+  "Agentic Workflows",
 ];
 
 export default function Hero() {
@@ -57,8 +57,8 @@ export default function Hero() {
           transition={{ delay: 1.2 }}
           className="mx-auto max-w-2xl px-4 text-base text-gray-600 dark:text-gray-300 sm:text-lg"
         >
-          Front-End Web Developer with 3 years of experience in building dynamic
-          web applications using React, Next.js, and TypeScript.
+          Front-End Web Developer with 4+ years of experience in building
+          dynamic web applications using React, Next.js, and TypeScript.
         </motion.p>
 
         <motion.div

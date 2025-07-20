@@ -7,22 +7,22 @@ import { faReact } from "@fortawesome/free-brands-svg-icons";
 const techStack = [
   {
     category: "Frontend",
-    icon: <FontAwesomeIcon icon={faReact} className="w-6 h-6" />,
+    icon: <FontAwesomeIcon icon={faReact} className="h-6 w-6" />,
     skills: ["React", "Next.js", "TypeScript", "Redux", "React Query"],
   },
   {
     category: "Backend",
-    icon: <FontAwesomeIcon icon={faTerminal} className="w-6 h-6" />,
+    icon: <FontAwesomeIcon icon={faTerminal} className="h-6 w-6" />,
     skills: ["Node.js", "Express", "PostgreSQL", "Prisma"],
   },
   {
     category: "Testing",
-    icon: <FontAwesomeIcon icon={faVial} className="w-6 h-6" />,
+    icon: <FontAwesomeIcon icon={faVial} className="h-6 w-6" />,
     skills: ["Cypress", "Playwright", "Jest"],
   },
   {
     category: "Tools & Others",
-    icon: <FontAwesomeIcon icon={faCode} className="w-6 h-6" />,
+    icon: <FontAwesomeIcon icon={faCode} className="h-6 w-6" />,
     skills: ["Git", "Docker", "NPM", "Shell Scripting"],
   },
 ];
@@ -54,39 +54,42 @@ export default function About() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
-          className="max-w-6xl mx-auto"
+          className="mx-auto max-w-6xl"
         >
           <motion.h2
             variants={itemVariants}
-            className="text-4xl font-bold text-center mb-8"
+            className="mb-8 text-center text-4xl font-bold"
           >
             About Me
           </motion.h2>
 
           <motion.p
             variants={itemVariants}
-            className="text-lg text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto text-center"
+            className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-600 dark:text-gray-300"
           >
-            Front-End Web Developer with 3 years of experience in developing and
-            maintaining dynamic web applications. I specialize in React,
+            Front-End Web Developer with 4+ years of experience in developing
+            and maintaining dynamic web applications. I specialize in React,
             Next.js, and TypeScript, with a strong focus on creating performant
             and user-friendly interfaces. I have experience leading frontend
-            teams and implementing best practices in project architecture.
+            teams and implementing best practices in project architecture. I am
+            also an AI enthusiast and have integrated AI-powered agentic
+            workflows in my projects to speed up development and improve
+            efficiency.
           </motion.p>
 
           <motion.div
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12"
+            className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
           >
             {techStack.map((category) => (
               <motion.div
                 key={category.category}
                 variants={itemVariants}
-                className="p-6 rounded-lg bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow"
+                className="rounded-lg bg-white p-6 shadow-lg transition-shadow hover:shadow-xl dark:bg-gray-800"
               >
-                <div className="flex items-center gap-3 mb-4">
+                <div className="mb-4 flex items-center gap-3">
                   {category.icon}
-                  <h3 className="font-semibold text-xl">{category.category}</h3>
+                  <h3 className="text-xl font-semibold">{category.category}</h3>
                 </div>
                 <ul className="space-y-2">
                   {category.skills.map((skill) => (
@@ -94,7 +97,7 @@ export default function About() {
                       key={skill}
                       className="flex items-center gap-2 text-gray-600 dark:text-gray-300"
                     >
-                      <FontAwesomeIcon icon={faCode} className="w-4 h-4" />
+                      <FontAwesomeIcon icon={faCode} className="h-4 w-4" />
                       {skill}
                     </li>
                   ))}

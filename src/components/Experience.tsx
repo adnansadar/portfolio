@@ -7,11 +7,11 @@ import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 // List of work experiences
 const experiences = [
   {
-    title: "Software Engineer",
-    company: "LitmusBlox",
-    period: "June 2022 - May 2024",
+    title: "Lead Frontend Engineer",
+    company: "PeopleBlox",
+    period: "June 2022 - June 2024",
     points: [
-      "Led a frontend team of 5 developers to design and deliver PeopleBlox, a competency assessment tool, achieving a significant reduction in employee evaluation time using Next.js, React, TypeScript, Redux, and RTK Query.",
+      "Led a frontend team of 5 developers as a founding engineer to design and deliver PeopleBlox, a competency assessment tool, achieving a significant reduction in employee evaluation time using Next.js, React, TypeScript, Redux, and RTK Query.",
       "Worked with the management and dev teams to define a workflow enhancing development efficiency by 25%. Involved in architecting the software solution and establishing a tech stack for new and existing products.",
     ],
   },
@@ -53,11 +53,11 @@ export default function Experience() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
-          className="max-w-4xl mx-auto"
+          className="mx-auto max-w-4xl"
         >
           <motion.h2
             variants={itemVariants}
-            className="text-4xl font-bold text-center mb-12"
+            className="mb-12 text-center text-4xl font-bold"
           >
             Work Experience
           </motion.h2>
@@ -67,21 +67,24 @@ export default function Experience() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="relative pl-8 border-l-2 border-gray-200 dark:border-gray-700"
+                className="relative border-l-2 border-gray-200 pl-8 dark:border-gray-700"
               >
                 <div className="absolute -left-3 top-0">
-                  <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
-                    <FontAwesomeIcon icon={faBuilding} className="w-3 h-3 text-white" />
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500">
+                    <FontAwesomeIcon
+                      icon={faBuilding}
+                      className="h-3 w-3 text-white"
+                    />
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+                <div className="rounded-lg bg-white p-6 shadow-lg transition-shadow hover:shadow-xl dark:bg-gray-800">
                   <h3 className="text-xl font-semibold">{exp.title}</h3>
-                  <div className="text-blue-600 dark:text-blue-400 font-medium mt-1">
+                  <div className="mt-1 font-medium text-blue-600 dark:text-blue-400">
                     {exp.company}
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 mt-1 text-sm">
-                    <FontAwesomeIcon icon={faCalendar} className="w-4 h-4" />
+                  <div className="mt-1 flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                    <FontAwesomeIcon icon={faCalendar} className="h-4 w-4" />
                     {exp.period}
                   </div>
                   <ul className="mt-4 space-y-3">
