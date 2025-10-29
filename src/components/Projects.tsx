@@ -67,60 +67,64 @@ export default function Projects() {
               <motion.div
                 key={project.title}
                 variants={itemVariants}
-                className="overflow-hidden rounded-lg bg-white shadow-lg transition-shadow hover:shadow-xl dark:bg-gray-800"
+                className="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition-shadow hover:shadow-xl dark:bg-gray-800"
               >
-                <div className="p-6">
-                  <div className="mb-4 flex items-start justify-between">
-                    <h3 className="text-2xl font-semibold">{project.title}</h3>
-                    <div className="flex gap-3">
-                      {project.github && (
+                <div className="flex flex-col justify-between p-6 h-full">
+                  <div>
+                    <div className="mb-4 flex items-start justify-between">
+                      <h3 className="text-2xl font-semibold">{project.title}</h3>
+                      <div className="flex gap-3">
+                        {project.github && (
+                          <Link
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                            aria-label={`View ${project.title} source code on GitHub`}
+                          >
+                            <FontAwesomeIcon
+                              icon={faGithub}
+                              className="h-5 w-5"
+                              aria-hidden="true"
+                            />
+                          </Link>
+                        )}
                         <Link
-                          href={project.github}
+                          href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                          aria-label={`View ${project.title} source code on GitHub`}
+                          aria-label={`Visit ${project.title} live site`}
                         >
                           <FontAwesomeIcon
-                            icon={faGithub}
+                            icon={faArrowUpRightFromSquare}
                             className="h-5 w-5"
                             aria-hidden="true"
                           />
                         </Link>
-                      )}
-                      <Link
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                        aria-label={`Visit ${project.title} live site`}
-                      >
-                        <FontAwesomeIcon
-                          icon={faArrowUpRightFromSquare}
-                          className="h-5 w-5"
-                          aria-hidden="true"
-                        />
-                      </Link>
+                      </div>
                     </div>
+
+                    <p className="text-gray-600 dark:text-gray-300">
+                      {project.description}
+                    </p>
                   </div>
 
-                  <p className="mb-4 text-gray-600 dark:text-gray-300">
-                    {project.description}
-                  </p>
+                  <div className="mt-4">
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {project.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700 dark:bg-blue-900 dark:text-blue-200"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
 
-                  <div className="mb-4 flex flex-wrap gap-2">
-                    {project.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700 dark:bg-blue-900 dark:text-blue-200"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="text-sm text-gray-500 dark:text-gray-400">
-                    {project.period}
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      {project.period}
+                    </div>
                   </div>
                 </div>
               </motion.div>
