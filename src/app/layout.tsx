@@ -8,6 +8,7 @@ import AnalyticsProvider from "@/components/AnalyticsProvider";
 import JsonLd from "@/components/JsonLd";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
+import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
   creator: "Adnan Sadar",
   publisher: "Adnan Sadar",
   robots: "index, follow",
+  metadataBase: new URL("https://adnansadar.com"),
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -89,7 +91,11 @@ export default function RootLayout({
         <JsonLd />
         <ThemeProviderWrapper>
           {children}
-          {GA_ID ? <AnalyticsProvider gaId={GA_ID} /> : null}
+          {GA_ID ? (
+            <Suspense fallback={null}>
+              <AnalyticsProvider gaId={GA_ID} />
+            </Suspense>
+          ) : null}
         </ThemeProviderWrapper>
         <Analytics />
         <SpeedInsights />
