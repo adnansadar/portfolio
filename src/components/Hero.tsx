@@ -8,7 +8,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const roles = [
   "Lead Frontend Engineer",
-  "Product Engineer",
+  "Product Design",
   "Agentic Workflows",
 ];
 

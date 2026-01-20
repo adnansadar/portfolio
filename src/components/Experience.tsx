@@ -9,7 +9,7 @@ const experiences = [
   {
     title: "Lead Frontend Engineer",
     company: "FoundersHub AI",
-    period: "June 2025 - Ongoing",
+    period: "June 2025 - November 2025",
     points: [
       "Executed comprehensive frontend architecture revamp, reducing build times by 50% and improving application performance by 20% through strategic code splitting, SCSS design tokens, and DRY principles.",
       "Implemented agentic AI workflows using Cursor AI and Claude Code subagents, streamlining design iterations, development cycles, and automated code reviews.",
