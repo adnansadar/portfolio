@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -10,6 +10,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
+import { PostHogProvider } from "./providers";
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
 
@@ -17,6 +18,12 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: "Adnan Sadar - Software Engineer",
   description:
@@ -52,9 +59,9 @@ export const metadata: Metadata = {
     ],
   },
 
-  // verification: {
-  //   google: "your-google-site-verification", // You'll need to add your verification code
-  // },
+  verification: {
+    google: "xEjpxBcTbz67WL5-x_FK70LTOM7DtkhGPbzTJv5lmMU",
+  },
   alternates: {
     canonical: "https://adnansadar.com",
   },
@@ -90,12 +97,14 @@ export default function RootLayout({
         ) : null}
         <JsonLd />
         <ThemeProviderWrapper>
+          <PostHogProvider>
           {children}
           {GA_ID ? (
             <Suspense fallback={null}>
               <AnalyticsProvider gaId={GA_ID} />
             </Suspense>
           ) : null}
+          </PostHogProvider>
         </ThemeProviderWrapper>
         <Analytics />
         <SpeedInsights />
