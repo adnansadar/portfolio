@@ -9,20 +9,20 @@ const projects = [
   {
     title: "Investors Engine",
     description:
-      "Built an investment research platform for users that displays financial data for 5000+ US stocks, accurate 10-year historical ratios, and advanced charting tools. The product roadmap also involves creating a personalized portfolio and watchlist management using a dashboard.",
+      "Worked on the frontend development of a fintech investment research platform focused on long term equity analysis and valuation tools. Also created a personalized portfolio and watchlist management system.",
     techStack: ["Next.js", "TypeScript", "React Query", "Redux", "Material UI"],
     github: "",
     live: "https://investorsengine.com/",
-    period: "May 2024 - Ongoing",
+    period: "February 2025 - May 2025",
   },
   {
-    title: "Cryptocurrency Portfolio Manager",
+    title: "Scholar Housing",
     description:
-      "Built a cryptocurrency tracking app using React and CoinGecko API, enabling users to monitor prices, market cap, and volume for 20+ cryptocurrencies.",
-    techStack: ["React", "CoinGecko API", "Tailwind CSS", "Chart.js"],
-    github: "https://github.com/adnansadar/Cryptocurrency-Price-Tracker",
-    live: "https://my-cryptotracker.netlify.app/",
-    period: "January 2021 - April 2021",
+      "Built a student housing platform focused on roommate compatibility and trusted sublease discovery for international and graduate students. Led product-driven frontend and full-stack development across authentication, onboarding, rule-based matching, and listings workflows.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "FastAPI", "PostgreSQL"],
+    github: "https://github.com/studentbnb-housing/student-housing-frontend",
+    live: "",
+    period: "November 2025 - Ongoing",
   },
 ];
 
