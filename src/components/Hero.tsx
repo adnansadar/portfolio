@@ -4,7 +4,11 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileLines } from "@fortawesome/free-regular-svg-icons";
-import { faChevronDown, faBriefcase, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faBriefcase,
+  faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
 import { cn } from "@/lib/utils";
 import { typographyStyles } from "@/design-system";
 import { useTypingAnimation } from "@/hooks";
@@ -34,8 +38,8 @@ export default function Hero() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -57,12 +61,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0, duration: 0.6 }}
-          className={cn(
-            "text-6xl md:text-7xl lg:text-8xl xl:text-9xl",
-            "font-bold tracking-tight leading-none text-foreground"
-          )}
+          className="text-[60px] font-bold leading-none tracking-tight text-foreground"
         >
-          Adnan Sadar
+          Hi, I am Adnan Sadar 👋
         </motion.h1>
 
         {/* Typing Animation */}
@@ -70,16 +71,16 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="flex items-center justify-center gap-1 min-h-[3rem]"
+          className="flex min-h-[3rem] items-center justify-center gap-1"
           aria-live="polite"
           aria-atomic="true"
         >
-          <span className="text-xl md:text-2xl lg:text-3xl font-medium text-muted-foreground">
+          <span className="text-xl font-medium text-muted-foreground md:text-2xl lg:text-3xl">
             {displayText}
           </span>
           <span
             className={cn(
-              "inline-block w-[3px] h-[1.2em] bg-foreground ml-1",
+              "ml-1 inline-block h-[1.2em] w-[3px] bg-foreground",
               isTyping || isDeleting ? "opacity-100" : "animate-blink"
             )}
             aria-hidden="true"
@@ -96,7 +97,8 @@ export default function Hero() {
             "mx-auto max-w-2xl text-muted-foreground"
           )}
         >
-          Building data-driven applications that transform complex problems into elegant solutions.
+          Building data-driven applications that transform complex problems into
+          elegant solutions.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -104,44 +106,51 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4"
+          className="flex flex-col items-center justify-center gap-3 pt-4 sm:flex-row"
         >
           <Button
-            onClick={() => scrollToSection('projects')}
+            onClick={() => scrollToSection("projects")}
             variant="default"
             size="default"
             className="gap-2"
             aria-label="View my work"
           >
-            <FontAwesomeIcon icon={faBriefcase} className="h-4 w-4" aria-hidden="true" />
+            <FontAwesomeIcon
+              icon={faBriefcase}
+              className="h-4 w-4"
+              aria-hidden="true"
+            />
             View Work
           </Button>
 
-          <Button
-            variant="secondary"
-            size="default"
-            className="gap-2"
-            asChild
-          >
+          <Button variant="secondary" size="default" className="gap-2" asChild>
             <Link
               href="/Adnan_Sadar_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download my resume (PDF)"
             >
-              <FontAwesomeIcon icon={faFileLines} className="h-4 w-4" aria-hidden="true" />
+              <FontAwesomeIcon
+                icon={faFileLines}
+                className="h-4 w-4"
+                aria-hidden="true"
+              />
               Resume
             </Link>
           </Button>
 
           <Button
-            onClick={() => scrollToSection('contact')}
+            onClick={() => scrollToSection("contact")}
             variant="ghost"
             size="default"
             className="gap-2 border border-border"
             aria-label="Contact me"
           >
-            <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" aria-hidden="true" />
+            <FontAwesomeIcon
+              icon={faEnvelope}
+              className="h-4 w-4"
+              aria-hidden="true"
+            />
             Contact
           </Button>
         </motion.div>
@@ -154,13 +163,13 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 2.3, duration: 0.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
-          onClick={() => scrollToSection('about')}
+          onClick={() => scrollToSection("about")}
           role="button"
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
-              scrollToSection('about');
+              scrollToSection("about");
             }
           }}
           aria-label="Scroll to About section"
@@ -177,7 +186,10 @@ export default function Hero() {
                 repeatType: "loop",
               }}
             >
-              <FontAwesomeIcon icon={faChevronDown} className="h-4 w-4 text-muted-foreground" />
+              <FontAwesomeIcon
+                icon={faChevronDown}
+                className="h-4 w-4 text-muted-foreground"
+              />
             </motion.div>
           </div>
         </motion.div>
