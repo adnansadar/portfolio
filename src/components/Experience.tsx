@@ -3,6 +3,13 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 import { faBuilding } from "@fortawesome/free-solid-svg-icons";
+import { cn } from "@/lib/utils";
+import {
+  typographyStyles,
+  layoutStyles,
+  staggerContainer,
+} from "@/design-system";
+import { Card } from "@/components/ui/card";
 
 // List of work experiences
 const experiences = [
@@ -35,16 +42,6 @@ const experiences = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
 const itemVariants = {
   hidden: { x: -20, opacity: 0 },
   visible: {
@@ -55,44 +52,44 @@ const itemVariants = {
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="experience" className={layoutStyles.section}>
+      <div className={layoutStyles.container}>
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={containerVariants}
+          variants={staggerContainer}
           className="mx-auto max-w-4xl"
         >
-          <motion.h2
-            variants={itemVariants}
-            className="mb-12 text-center text-4xl font-bold"
-          >
+          <h2 className={cn(typographyStyles.h2, "mb-12 text-center")}>
             Work Experience
-          </motion.h2>
+          </h2>
 
           <div className="space-y-8">
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="relative border-l-2 border-gray-200 pl-8 dark:border-gray-700"
+                className="relative border-l-2 border-border pl-8"
               >
                 <div className="absolute -left-3 top-0">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground border-2 border-background">
                     <FontAwesomeIcon
                       icon={faBuilding}
-                      className="h-3 w-3 text-white"
+                      className="h-3 w-3 text-primary-foreground"
                     />
                   </div>
                 </div>
 
-                <div className="rounded-lg bg-white p-6 shadow-lg transition-shadow hover:shadow-xl dark:bg-gray-800">
-                  <h3 className="text-xl font-semibold">{exp.title}</h3>
-                  <div className="mt-1 font-medium text-blue-600 dark:text-blue-400">
+                <Card className="p-6 transition-all hover:bg-muted/50">
+                  <h3 className={typographyStyles.h5}>{exp.title}</h3>
+                  <div className="mt-1 font-semibold text-foreground">
                     {exp.company}
                   </div>
-                  <div className="mt-1 flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                  <div className={cn(
+                    typographyStyles.bodySmall,
+                    "mt-1 flex items-center gap-2 text-muted-foreground"
+                  )}>
                     <FontAwesomeIcon icon={faCalendar} className="h-4 w-4" />
                     {exp.period}
                   </div>
@@ -100,13 +97,13 @@ export default function Experience() {
                     {exp.points.map((point, idx) => (
                       <li
                         key={idx}
-                        className="text-gray-600 dark:text-gray-300"
+                        className={cn(typographyStyles.body, "text-muted-foreground")}
                       >
                         • {point}
                       </li>
                     ))}
                   </ul>
-                </div>
+                </Card>
               </motion.div>
             ))}
           </div>

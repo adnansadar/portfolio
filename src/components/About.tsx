@@ -1,110 +1,85 @@
 "use client";
 import { motion } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCode, faTerminal, faVial } from "@fortawesome/free-solid-svg-icons";
-import { faReact } from "@fortawesome/free-brands-svg-icons";
+import { cn } from "@/lib/utils";
+import {
+  typographyStyles,
+  layoutStyles,
+  fadeInLeft,
+  fadeInRight,
+  staggerContainer,
+} from "@/design-system";
+import { Badge } from "@/components/ui/badge";
 
 const techStack = [
   {
     category: "Frontend",
-    icon: <FontAwesomeIcon icon={faReact} className="h-6 w-6" />,
     skills: ["React", "Next.js", "TypeScript", "Redux", "React Query"],
   },
   {
     category: "Backend",
-    icon: <FontAwesomeIcon icon={faTerminal} className="h-6 w-6" />,
     skills: ["Node.js", "Express", "PostgreSQL", "Prisma"],
   },
   {
     category: "Testing",
-    icon: <FontAwesomeIcon icon={faVial} className="h-6 w-6" />,
     skills: ["Cypress", "Playwright", "Jest"],
   },
   {
     category: "Tools & Others",
-    icon: <FontAwesomeIcon icon={faCode} className="h-6 w-6" />,
     skills: ["Git", "Docker", "NPM", "Shell Scripting"],
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
-
 export default function About() {
   return (
-    <section id="about" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="about" className={cn(layoutStyles.section)}>
+      <div className={layoutStyles.container}>
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={containerVariants}
+          variants={staggerContainer}
           className="mx-auto max-w-6xl"
         >
-          <motion.h2
-            variants={itemVariants}
-            className="mb-8 text-center text-4xl font-bold"
-          >
+          <h2 className={cn(typographyStyles.h2, "mb-12 text-center")}>
             About Me
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            variants={itemVariants}
-            className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-600 dark:text-gray-300"
-          >
-            Front-End Web Developer with 4+ years of experience in developing
-            and maintaining dynamic web applications. I specialize in React,
-            Next.js, and TypeScript, with a strong focus on creating performant
-            and user-friendly interfaces. I have experience leading frontend
-            teams and implementing best practices in project architecture. I am
-            also an AI enthusiast and have integrated AI-powered agentic
-            workflows in my projects to speed up development and improve
-            efficiency.
-          </motion.p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left: Bio */}
+            <motion.div variants={fadeInLeft} className="space-y-4">
+              <p className={typographyStyles.bodyLarge}>
+                Front-End Web Developer with 4+ years of experience in
+                developing and maintaining dynamic web applications. I
+                specialize in React, Next.js, and TypeScript, with a strong
+                focus on creating performant and user-friendly interfaces.
+              </p>
+              <p className={typographyStyles.body}>
+                I have experience leading frontend teams and implementing best
+                practices in project architecture. I am also an AI enthusiast
+                and have integrated AI-powered agentic workflows in my projects
+                to speed up development and improve efficiency.
+              </p>
+            </motion.div>
 
-          <motion.div
-            variants={containerVariants}
-            className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
-          >
-            {techStack.map((category) => (
-              <motion.div
-                key={category.category}
-                variants={itemVariants}
-                className="rounded-lg bg-white p-6 shadow-lg transition-shadow hover:shadow-xl dark:bg-gray-800"
-              >
-                <div className="mb-4 flex items-center gap-3">
-                  {category.icon}
-                  <h3 className="text-xl font-semibold">{category.category}</h3>
+            {/* Right: Skills */}
+            <motion.div variants={fadeInRight} className="space-y-6">
+              {techStack.map((category) => (
+                <div
+                  key={category.category}
+                  className="border-l-2 border-border pl-4"
+                >
+                  <h3 className={typographyStyles.h6}>{category.category}</h3>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {category.skills.map((skill) => (
+                      <Badge key={skill} variant="outline">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-                <ul className="space-y-2">
-                  {category.skills.map((skill) => (
-                    <li
-                      key={skill}
-                      className="flex items-center gap-2 text-gray-600 dark:text-gray-300"
-                    >
-                      <FontAwesomeIcon icon={faCode} className="h-4 w-4" />
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -5,6 +5,7 @@ import ThemeToggle from "./ThemeToggle";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { cn } from "@/lib/utils";
 
 const navItems = [
   { name: "About", href: "#about" },
@@ -16,10 +17,22 @@ const navItems = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      const sections = ["about", "experience", "projects", "contact"];
+      const current = sections.find((section) => {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      setActiveSection(current || "");
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -32,7 +45,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled || isMenuOpen
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg"
+          ? "bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg"
           : "bg-transparent"
       }`}
     >
@@ -40,7 +53,7 @@ export default function Navbar() {
         <nav className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="text-xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+            className="text-xl font-bold text-foreground hover:text-muted-foreground transition-colors"
           >
             Adnan Sadar
           </Link>
@@ -52,7 +65,11 @@ export default function Navbar() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className={cn(
+                      "text-muted-foreground hover:text-foreground transition-colors",
+                      activeSection === item.href.slice(1) &&
+                        "underline decoration-2 underline-offset-4"
+                    )}
                   >
                     {item.name}
                   </Link>
@@ -67,7 +84,7 @@ export default function Navbar() {
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Toggle menu"
             >
               <FontAwesomeIcon
@@ -91,7 +108,11 @@ export default function Navbar() {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className={cn(
+                      "block text-muted-foreground hover:text-foreground transition-colors",
+                      activeSection === item.href.slice(1) &&
+                        "underline decoration-2 underline-offset-4"
+                    )}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}

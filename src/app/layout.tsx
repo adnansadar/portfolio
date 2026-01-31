@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -13,11 +13,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { PostHogProvider } from "./providers";
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -78,7 +73,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={poppins.className}>
+      <body className={GeistSans.className}>
         {GA_ID ? (
           <>
             <Script

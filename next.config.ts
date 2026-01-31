@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID:
       process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID,
   },
+  images: {
+    remotePatterns: [{ hostname: "placehold.co", protocol: "https" }],
+  },
 };
 
 export default nextConfig;
