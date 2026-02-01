@@ -51,7 +51,7 @@ const projects = [
     github: "",
     live: "https://investorsengine.com/",
     period: "February 2025 - May 2025",
-    screenshot: "",
+    screenshot: "/projects_investors_engine.png",
     featured: true,
     caseStudyUrl: "/projects/investors-engine",
   },
@@ -63,7 +63,7 @@ const projects = [
     github: "https://github.com/studentbnb-housing/student-housing-frontend",
     live: "",
     period: "November 2025 - Ongoing",
-    screenshot: "",
+    screenshot: "/projects_scholarhousing.png",
     featured: false,
   },
   {
@@ -74,7 +74,7 @@ const projects = [
     github: "",
     live: "",
     period: "June 2022 - June 2024",
-    screenshot: "",
+    screenshot: "/projects_peopleblox.png",
     featured: false,
     isPrivate: true,
   },
@@ -107,13 +107,13 @@ export default function Projects() {
               <motion.div variants={fadeInUp}>
                 <Card className="group overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                  <div className="relative aspect-video lg:aspect-auto lg:min-h-[400px] overflow-hidden">
+                  <div className="relative aspect-video lg:aspect-auto lg:min-h-[400px] overflow-hidden bg-muted/50">
                     {featuredProject.screenshot ? (
                       <Image
                         src={featuredProject.screenshot}
                         alt={`${featuredProject.title} screenshot`}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="object-contain transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <PlaceholderImage
