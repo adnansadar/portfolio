@@ -23,7 +23,7 @@ const experiences = [
     ],
   },
   {
-    title: "Lead Frontend Engineer",
+    title: "Senior Software Engineer",
     company: "PeopleBlox",
     period: "June 2022 - June 2024",
     points: [

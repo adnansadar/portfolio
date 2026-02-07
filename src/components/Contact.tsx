@@ -61,7 +61,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
+    "idle" | "success" | "error" | "rate_limit"
   >("idle");
 
   const validateForm = (): boolean => {
@@ -105,11 +105,30 @@ export default function Contact() {
     setSubmitStatus("idle");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      window.location.href = `mailto:adnansadar11@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${formData.message}`;
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 429) {
+          setSubmitStatus("rate_limit");
+        } else {
+          throw new Error(data.error || "Failed to send message");
+        }
+        return;
+      }
+
       setSubmitStatus("success");
       setFormData({ name: "", email: "", message: "" });
+
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => setSubmitStatus("idle"), 5000);
     } catch (error) {
+      console.error("Form submission error:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -268,11 +287,30 @@ export default function Contact() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="rounded-lg border border-border bg-secondary p-4"
+                    className="border-destructive bg-destructive/10 rounded-lg border p-4"
                   >
                     <p className={typographyStyles.body}>
-                      Something went wrong. Please try again or email me
-                      directly.
+                      Unable to send message. Please try again or{" "}
+                      <Link
+                        href="mailto:adnansadar11@gmail.com"
+                        className="text-primary underline"
+                      >
+                        email me directly
+                      </Link>
+                      .
+                    </p>
+                  </motion.div>
+                )}
+
+                {submitStatus === "rate_limit" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="border-destructive bg-destructive/10 rounded-lg border p-4"
+                  >
+                    <p className={typographyStyles.body}>
+                      Too many requests. Please wait a few minutes before trying
+                      again.
                     </p>
                   </motion.div>
                 )}

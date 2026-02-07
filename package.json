@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -16,6 +17,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",
+    "@react-email/components": "^1.0.7",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "class-variance-authority": "^0.7.1",
@@ -27,6 +29,8 @@
     "posthog-js": "^1.334.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-email": "^5.2.8",
+    "resend": "^6.9.1",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
