@@ -73,7 +73,7 @@ export default function Experience() {
                 className="relative border-l-2 border-border pl-8"
               >
                 <div className="absolute -left-3 top-0">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground border-2 border-background">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-background bg-foreground">
                     <FontAwesomeIcon
                       icon={faBuilding}
                       className="h-3 w-3 text-primary-foreground"
@@ -86,10 +86,12 @@ export default function Experience() {
                   <div className="mt-1 font-semibold text-foreground">
                     {exp.company}
                   </div>
-                  <div className={cn(
-                    typographyStyles.bodySmall,
-                    "mt-1 flex items-center gap-2 text-muted-foreground"
-                  )}>
+                  <div
+                    className={cn(
+                      typographyStyles.bodySmall,
+                      "mt-1 flex items-center gap-2 text-muted-foreground"
+                    )}
+                  >
                     <FontAwesomeIcon icon={faCalendar} className="h-4 w-4" />
                     {exp.period}
                   </div>
@@ -97,7 +99,10 @@ export default function Experience() {
                     {exp.points.map((point, idx) => (
                       <li
                         key={idx}
-                        className={cn(typographyStyles.body, "text-muted-foreground")}
+                        className={cn(
+                          typographyStyles.body,
+                          "text-muted-foreground"
+                        )}
                       >
                         • {point}
                       </li>

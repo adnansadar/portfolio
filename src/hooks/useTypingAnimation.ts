@@ -1,18 +1,18 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
 interface UseTypingAnimationOptions {
   phrases: string[];
-  typingSpeed?: number;      // Default: 100ms per character
-  deletingSpeed?: number;    // Default: 50ms per character
-  pauseDuration?: number;    // Default: 2000ms pause after typing
-  delayStart?: number;       // Default: 0ms initial delay
+  typingSpeed?: number; // Default: 100ms per character
+  deletingSpeed?: number; // Default: 50ms per character
+  pauseDuration?: number; // Default: 2000ms pause after typing
+  delayStart?: number; // Default: 0ms initial delay
 }
 
 interface UseTypingAnimationReturn {
-  displayText: string;           // Current text to display
-  isTyping: boolean;            // Currently typing (not deleting/paused)
-  isDeleting: boolean;          // Currently deleting characters
-  currentPhraseIndex: number;   // Index of current phrase
+  displayText: string; // Current text to display
+  isTyping: boolean; // Currently typing (not deleting/paused)
+  isDeleting: boolean; // Currently deleting characters
+  currentPhraseIndex: number; // Index of current phrase
 }
 
 export function useTypingAnimation({
@@ -22,7 +22,7 @@ export function useTypingAnimation({
   pauseDuration = 2000,
   delayStart = 0,
 }: UseTypingAnimationOptions): UseTypingAnimationReturn {
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState("");
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -76,7 +76,16 @@ export function useTypingAnimation({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [displayText, phraseIndex, isDeleting, phrases, typingSpeed, deletingSpeed, pauseDuration, delayStart]);
+  }, [
+    displayText,
+    phraseIndex,
+    isDeleting,
+    phrases,
+    typingSpeed,
+    deletingSpeed,
+    pauseDuration,
+    delayStart,
+  ]);
 
   return {
     displayText,

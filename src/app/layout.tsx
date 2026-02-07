@@ -15,7 +15,7 @@ import { PostHogProvider } from "./providers";
 config.autoAddCss = false;
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
 };
 
@@ -93,12 +93,12 @@ export default function RootLayout({
         <JsonLd />
         <ThemeProviderWrapper>
           <PostHogProvider>
-          {children}
-          {GA_ID ? (
-            <Suspense fallback={null}>
-              <AnalyticsProvider gaId={GA_ID} />
-            </Suspense>
-          ) : null}
+            {children}
+            {GA_ID ? (
+              <Suspense fallback={null}>
+                <AnalyticsProvider gaId={GA_ID} />
+              </Suspense>
+            ) : null}
           </PostHogProvider>
         </ThemeProviderWrapper>
         <Analytics />

@@ -45,7 +45,4 @@ export {
 export { cn } from "@/lib/utils";
 
 // Export custom typography and layout utilities
-export {
-  typographyStyles,
-  layoutStyles,
-} from "./component-styles";
+export { typographyStyles, layoutStyles } from "./component-styles";

@@ -15,7 +15,7 @@ This design system is built on three core principles:
 Import from the design system:
 
 ```typescript
-import { getButtonClasses, fadeInUp, colors } from '@/design-system';
+import { getButtonClasses, fadeInUp, colors } from "@/design-system";
 ```
 
 ## Design Tokens
@@ -25,11 +25,13 @@ import { getButtonClasses, fadeInUp, colors } from '@/design-system';
 All colors use HSL format for easy manipulation.
 
 **Light Mode:**
+
 - Backgrounds: White (#FFFFFF), Off-white (#F8F9FA), Light gray (#F1F3F5)
 - Text: Near-black (#1A1A1A), Dark gray (#4A4A4A), Medium gray (#737373)
 - Accent: Pure black (#000000)
 
 **Dark Mode:**
+
 - Backgrounds: Near-black (#0A0A0A), Dark gray (#1A1A1A), Medium gray (#2A2A2A)
 - Text: White (#FFFFFF), Light gray (#E0E0E0), Medium gray (#A0A0A0)
 - Accent: Pure white (#FFFFFF)
@@ -39,6 +41,7 @@ All colors use HSL format for easy manipulation.
 **Font Family:** Inter (weights 300, 400, 500, 600, 700)
 
 **Font Sizes:**
+
 - `xs`: 12px / 16px line height
 - `sm`: 14px / 20px
 - `base`: 16px / 24px
@@ -49,6 +52,7 @@ All colors use HSL format for easy manipulation.
 ### Spacing
 
 Based on 4px unit system:
+
 - `0.5`: 2px
 - `1`: 4px
 - `2`: 8px
@@ -318,12 +322,12 @@ import { pageTransition } from '@/design-system';
 ### cn (Class Name Combiner)
 
 ```typescript
-import { cn } from '@/design-system';
+import { cn } from "@/design-system";
 
 const classes = cn(
-  'base-class',
-  isActive && 'active-class',
-  isPrimary ? 'primary' : 'secondary'
+  "base-class",
+  isActive && "active-class",
+  isPrimary ? "primary" : "secondary"
 );
 ```
 

@@ -60,9 +60,9 @@ export default function Contact() {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">(
-    "idle"
-  );
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -130,17 +130,19 @@ export default function Contact() {
             Get In Touch
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {/* Left: Contact Info */}
             <motion.div variants={fadeInLeft} className="space-y-8">
               <div>
                 <h3 className={cn(typographyStyles.h5, "mb-4")}>
                   Let&apos;s Connect
                 </h3>
-                <p className={cn(typographyStyles.body, "text-muted-foreground")}>
-                  I&apos;m always open to discussing new projects, creative ideas,
-                  or opportunities to be part of your vision. Feel free to reach
-                  out through the form or via any of the links below.
+                <p
+                  className={cn(typographyStyles.body, "text-muted-foreground")}
+                >
+                  I&apos;m always open to discussing new projects, creative
+                  ideas, or opportunities to be part of your vision. Feel free
+                  to reach out through the form or via any of the links below.
                 </p>
               </div>
 
@@ -151,7 +153,7 @@ export default function Contact() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 rounded-lg border border-border transition-all hover:bg-muted/50"
+                    className="flex items-center gap-4 rounded-lg border border-border p-4 transition-all hover:bg-muted/50"
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
                       <FontAwesomeIcon
@@ -160,10 +162,20 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <div className={cn(typographyStyles.bodySmall, "font-semibold")}>
+                      <div
+                        className={cn(
+                          typographyStyles.bodySmall,
+                          "font-semibold"
+                        )}
+                      >
                         {link.name}
                       </div>
-                      <div className={cn(typographyStyles.bodySmall, "text-muted-foreground")}>
+                      <div
+                        className={cn(
+                          typographyStyles.bodySmall,
+                          "text-muted-foreground"
+                        )}
+                      >
                         {link.label}
                       </div>
                     </div>
@@ -222,7 +234,9 @@ export default function Contact() {
                     placeholder="Your message..."
                   />
                   {errors.message && (
-                    <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.message}
+                    </p>
                   )}
                 </div>
 
@@ -242,7 +256,7 @@ export default function Contact() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-lg bg-secondary border border-border"
+                    className="rounded-lg border border-border bg-secondary p-4"
                   >
                     <p className={typographyStyles.body}>
                       Message sent successfully! I&apos;ll get back to you soon.
@@ -254,10 +268,11 @@ export default function Contact() {
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-lg bg-secondary border border-border"
+                    className="rounded-lg border border-border bg-secondary p-4"
                   >
                     <p className={typographyStyles.body}>
-                      Something went wrong. Please try again or email me directly.
+                      Something went wrong. Please try again or email me
+                      directly.
                     </p>
                   </motion.div>
                 )}

@@ -44,7 +44,7 @@ export default function About() {
             About Me
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {/* Left: Bio */}
             <motion.div variants={fadeInLeft} className="space-y-4">
               <p className={typographyStyles.bodyLarge}>

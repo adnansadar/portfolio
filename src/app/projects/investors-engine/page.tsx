@@ -24,10 +24,10 @@ import Footer from "@/components/Footer";
 // Placeholder component for screenshots
 function PlaceholderImage({ emoji, title }: { emoji: string; title: string }) {
   return (
-    <div className="w-full h-full bg-gray-50 dark:bg-gray-900 flex items-center justify-center border border-gray-200 dark:border-gray-800">
+    <div className="flex h-full w-full items-center justify-center border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
       <div className="text-center">
-        <div className="text-5xl mb-3">{emoji}</div>
-        <p className="text-sm text-muted-foreground font-medium">{title}</p>
+        <div className="mb-3 text-5xl">{emoji}</div>
+        <p className="text-sm font-medium text-muted-foreground">{title}</p>
       </div>
     </div>
   );
@@ -51,7 +51,7 @@ function FeatureCard({
     <motion.div variants={fadeInUp}>
       <Card className="overflow-hidden">
         {/* Screenshot area */}
-        <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
+        <div className="flex aspect-video items-center justify-center overflow-hidden bg-muted">
           {screenshot ? (
             <Image src={screenshot} alt={title} fill className="object-cover" />
           ) : (
@@ -62,10 +62,12 @@ function FeatureCard({
         {/* Content */}
         <CardContent className="p-6">
           <h3 className={typographyStyles.h5}>{title}</h3>
-          <p className={cn(typographyStyles.body, "mt-2 text-muted-foreground")}>
+          <p
+            className={cn(typographyStyles.body, "mt-2 text-muted-foreground")}
+          >
             {description}
           </p>
-          <div className="flex flex-wrap gap-2 mt-4">
+          <div className="mt-4 flex flex-wrap gap-2">
             {technologies.map((tech) => (
               <Badge key={tech} variant="outline">
                 {tech}
@@ -97,16 +99,18 @@ function ChallengeCard({
 
         <div className="space-y-4">
           <div>
-            <h4 className="font-semibold mb-2">Problem</h4>
+            <h4 className="mb-2 font-semibold">Problem</h4>
             <p className={typographyStyles.body}>{problem}</p>
           </div>
           <div>
-            <h4 className="font-semibold mb-2">Solution</h4>
+            <h4 className="mb-2 font-semibold">Solution</h4>
             <p className={typographyStyles.body}>{solution}</p>
           </div>
           <div>
-            <h4 className="font-semibold mb-2">Result</h4>
-            <p className={cn(typographyStyles.body, "text-primary font-medium")}>
+            <h4 className="mb-2 font-semibold">Result</h4>
+            <p
+              className={cn(typographyStyles.body, "font-medium text-primary")}
+            >
               {result}
             </p>
           </div>
@@ -319,7 +323,7 @@ export default function InvestorsEngineCaseStudy() {
         {/* Hero Section */}
         <section
           className={cn(
-            "relative min-h-[60vh] flex items-center",
+            "relative flex min-h-[60vh] items-center",
             "px-4 py-20 sm:py-24 md:py-32"
           )}
         >
@@ -328,13 +332,13 @@ export default function InvestorsEngineCaseStudy() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="max-w-4xl mx-auto w-full"
+            className="mx-auto w-full max-w-4xl"
           >
             {/* Back Link */}
             <motion.div variants={fadeInUp}>
               <Link
                 href="/#projects"
-                className="inline-flex items-center gap-2 mb-8 text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="mb-8 inline-flex items-center gap-2 text-muted-foreground transition-colors duration-200 hover:text-foreground"
               >
                 <FontAwesomeIcon icon={faArrowLeft} />
                 Back to Projects
@@ -349,7 +353,7 @@ export default function InvestorsEngineCaseStudy() {
             {/* Subtitle */}
             <motion.p
               variants={fadeInUp}
-              className={cn(typographyStyles.h5, "text-muted-foreground mt-4")}
+              className={cn(typographyStyles.h5, "mt-4 text-muted-foreground")}
             >
               Investment Research Platform for Long-Term Equity Analysis
             </motion.p>
@@ -357,7 +361,7 @@ export default function InvestorsEngineCaseStudy() {
             {/* Metadata Cards */}
             <motion.div
               variants={fadeInUp}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8"
+              className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3"
             >
               {[
                 { label: "Role", value: "Lead Frontend Engineer" },
@@ -365,20 +369,17 @@ export default function InvestorsEngineCaseStudy() {
                 { label: "Status", value: "Live" },
               ].map((item) => (
                 <Card key={item.label} className="p-4">
-                  <div className="text-sm text-muted-foreground">{item.label}</div>
-                  <div className="font-semibold mt-1">{item.value}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {item.label}
+                  </div>
+                  <div className="mt-1 font-semibold">{item.value}</div>
                 </Card>
               ))}
             </motion.div>
 
             {/* CTA */}
             <motion.div variants={fadeInUp}>
-              <Button
-                variant="default"
-                size="lg"
-                className="mt-8"
-                asChild
-              >
+              <Button variant="default" size="lg" className="mt-8" asChild>
                 <a
                   href="https://investorsengine.com"
                   target="_blank"
@@ -396,7 +397,12 @@ export default function InvestorsEngineCaseStudy() {
         </section>
 
         {/* Overview Section */}
-        <section className={cn(layoutStyles.section, "max-w-4xl mx-auto px-4 bg-muted/30")}>
+        <section
+          className={cn(
+            layoutStyles.section,
+            "mx-auto max-w-4xl bg-muted/30 px-4"
+          )}
+        >
           <h2 className={cn(typographyStyles.h3, "mb-8")}>Overview</h2>
 
           <motion.div
@@ -411,9 +417,10 @@ export default function InvestorsEngineCaseStudy() {
               designed to help long-term equity investors analyze and track over
               10,000 US stocks. The platform provides real-time financial data,
               advanced charting tools, customizable screeners, and portfolio
-              tracking capabilities—all in a clean, intuitive interface. Built for
-              both novice and experienced investors, it consolidates scattered
-              financial information into a single, powerful research hub.
+              tracking capabilities—all in a clean, intuitive interface. Built
+              for both novice and experienced investors, it consolidates
+              scattered financial information into a single, powerful research
+              hub.
             </motion.p>
             <motion.p variants={fadeInUp} className="text-lg leading-loose">
               The challenge was building a data-intensive application that
@@ -428,17 +435,18 @@ export default function InvestorsEngineCaseStudy() {
             <motion.p variants={fadeInUp} className="text-lg leading-loose">
               As the lead frontend engineer, I architected the entire UI, made
               critical technology decisions, and implemented the core features
-              including the stock screener, interactive charting system, portfolio
-              tracker, and financial statement displays. I also established
-              frontend best practices, implemented the state management
-              architecture, and optimized performance to ensure the application
-              scaled effectively as the user base and data volume grew.
+              including the stock screener, interactive charting system,
+              portfolio tracker, and financial statement displays. I also
+              established frontend best practices, implemented the state
+              management architecture, and optimized performance to ensure the
+              application scaled effectively as the user base and data volume
+              grew.
             </motion.p>
           </motion.div>
         </section>
 
         {/* Key Features Section */}
-        <section className={cn(layoutStyles.section, "max-w-6xl mx-auto px-4")}>
+        <section className={cn(layoutStyles.section, "mx-auto max-w-6xl px-4")}>
           <h2 className={cn(typographyStyles.h3, "mb-12 text-center")}>
             Key Features
           </h2>
@@ -457,7 +465,12 @@ export default function InvestorsEngineCaseStudy() {
         </section>
 
         {/* Technical Implementation Section */}
-        <section className={cn(layoutStyles.section, "max-w-4xl mx-auto px-4 bg-muted/30")}>
+        <section
+          className={cn(
+            layoutStyles.section,
+            "mx-auto max-w-4xl bg-muted/30 px-4"
+          )}
+        >
           <h2 className={cn(typographyStyles.h3, "mb-12")}>
             Technical Implementation
           </h2>
@@ -469,24 +482,26 @@ export default function InvestorsEngineCaseStudy() {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeInUp}
           >
-            <Card className="p-8 mb-12">
+            <Card className="mb-12 p-8">
               <h3 className={cn(typographyStyles.h5, "mb-4")}>Architecture</h3>
-            <p className="text-lg leading-loose mb-6">
-              The frontend is built on Next.js 14 with React 18 and TypeScript,
-              providing a robust foundation for scalability and type safety.
-              Material UI serves as the component library, ensuring consistent
-              design and accessibility. The state management strategy combines
-              Redux Toolkit for UI state and React Query for server state,
-              creating a clear separation of concerns that improved code
-              maintainability and debugging efficiency.
-            </p>
-            <p className="text-lg leading-loose">
-              For data visualization, Apache ECharts handles complex financial
-              charts with thousands of data points, while Tanstack Table powers
-              the customizable financial statement tables. The application is
-              deployed on Vercel with automatic deployments from the main branch,
-              ensuring rapid iteration and reliable production updates.
-            </p>
+              <p className="mb-6 text-lg leading-loose">
+                The frontend is built on Next.js 14 with React 18 and
+                TypeScript, providing a robust foundation for scalability and
+                type safety. Material UI serves as the component library,
+                ensuring consistent design and accessibility. The state
+                management strategy combines Redux Toolkit for UI state and
+                React Query for server state, creating a clear separation of
+                concerns that improved code maintainability and debugging
+                efficiency.
+              </p>
+              <p className="text-lg leading-loose">
+                For data visualization, Apache ECharts handles complex financial
+                charts with thousands of data points, while Tanstack Table
+                powers the customizable financial statement tables. The
+                application is deployed on Vercel with automatic deployments
+                from the main branch, ensuring rapid iteration and reliable
+                production updates.
+              </p>
             </Card>
           </motion.div>
 
@@ -505,16 +520,17 @@ export default function InvestorsEngineCaseStudy() {
               <h4 className={typographyStyles.h6}>
                 React Query + Redux: Hybrid State Management
               </h4>
-              <p className="text-lg leading-loose mt-3">
+              <p className="mt-3 text-lg leading-loose">
                 Rather than forcing all state into a single paradigm, I chose to
                 combine React Query for server state (stock data, financials,
                 real-time prices) with Redux Toolkit for client state (UI
                 preferences, filters, user settings). This separation made the
                 codebase more intuitive—server data with built-in caching and
-                refetching logic stayed in React Query, while UI state that needed
-                to persist across sessions lived in Redux with Redux Persist. The
-                result was cleaner code, easier debugging, and better performance
-                through automatic cache invalidation and optimistic updates.
+                refetching logic stayed in React Query, while UI state that
+                needed to persist across sessions lived in Redux with Redux
+                Persist. The result was cleaner code, easier debugging, and
+                better performance through automatic cache invalidation and
+                optimistic updates.
               </p>
             </motion.div>
 
@@ -525,15 +541,16 @@ export default function InvestorsEngineCaseStudy() {
               <h4 className={typographyStyles.h6}>
                 Apache ECharts for Financial Visualization
               </h4>
-              <p className="text-lg leading-loose mt-3">
-                After evaluating several charting libraries including Chart.js and
-                Recharts, I selected Apache ECharts for its superior performance
-                with large datasets and extensive customization options. ECharts
-                handles thousands of candlestick data points smoothly while
-                supporting advanced features like technical indicators, drawing
-                tools, and multi-axis charts. The library's canvas rendering
-                ensures smooth interactions even on lower-end devices, and its
-                flexible theming system allowed for seamless dark mode integration.
+              <p className="mt-3 text-lg leading-loose">
+                After evaluating several charting libraries including Chart.js
+                and Recharts, I selected Apache ECharts for its superior
+                performance with large datasets and extensive customization
+                options. ECharts handles thousands of candlestick data points
+                smoothly while supporting advanced features like technical
+                indicators, drawing tools, and multi-axis charts. The library's
+                canvas rendering ensures smooth interactions even on lower-end
+                devices, and its flexible theming system allowed for seamless
+                dark mode integration.
               </p>
             </motion.div>
 
@@ -544,15 +561,16 @@ export default function InvestorsEngineCaseStudy() {
               <h4 className={typographyStyles.h6}>
                 Tanstack Table: Headless UI for Custom Tables
               </h4>
-              <p className="text-lg leading-loose mt-3">
-                Financial statements required specialized table functionality—multi-level
-                sorting, column hiding, row grouping, and historical comparisons.
-                Tanstack Table's headless approach provided the data management
-                logic without imposing UI constraints, allowing me to build custom
-                table designs that matched the application's aesthetic while
-                leveraging battle-tested sorting, filtering, and pagination logic.
-                This flexibility was crucial for creating tables that felt native
-                to the platform rather than generic components.
+              <p className="mt-3 text-lg leading-loose">
+                Financial statements required specialized table
+                functionality—multi-level sorting, column hiding, row grouping,
+                and historical comparisons. Tanstack Table's headless approach
+                provided the data management logic without imposing UI
+                constraints, allowing me to build custom table designs that
+                matched the application's aesthetic while leveraging
+                battle-tested sorting, filtering, and pagination logic. This
+                flexibility was crucial for creating tables that felt native to
+                the platform rather than generic components.
               </p>
             </motion.div>
 
@@ -561,23 +579,23 @@ export default function InvestorsEngineCaseStudy() {
               className="border-l-4 border-primary pl-6"
             >
               <h4 className={typographyStyles.h6}>Performance Optimization</h4>
-              <p className="text-lg leading-loose mt-3">
-                Performance was achieved through multiple strategies: React Query's
-                intelligent caching reduced redundant API calls; code splitting
-                with Next.js dynamic imports ensured users only loaded the
-                JavaScript they needed; virtualized lists rendered only visible
-                table rows; and memoization with useMemo and useCallback prevented
-                unnecessary re-renders. Additionally, I implemented progressive
-                loading patterns where essential data loaded first, followed by
-                secondary information, creating the perception of faster load times
-                even with large datasets.
+              <p className="mt-3 text-lg leading-loose">
+                Performance was achieved through multiple strategies: React
+                Query's intelligent caching reduced redundant API calls; code
+                splitting with Next.js dynamic imports ensured users only loaded
+                the JavaScript they needed; virtualized lists rendered only
+                visible table rows; and memoization with useMemo and useCallback
+                prevented unnecessary re-renders. Additionally, I implemented
+                progressive loading patterns where essential data loaded first,
+                followed by secondary information, creating the perception of
+                faster load times even with large datasets.
               </p>
             </motion.div>
           </motion.div>
         </section>
 
         {/* Challenges & Solutions Section */}
-        <section className={cn(layoutStyles.section, "max-w-6xl mx-auto px-4")}>
+        <section className={cn(layoutStyles.section, "mx-auto max-w-6xl px-4")}>
           <h2 className={cn(typographyStyles.h3, "mb-12 text-center")}>
             Challenges & Solutions
           </h2>
@@ -596,7 +614,12 @@ export default function InvestorsEngineCaseStudy() {
         </section>
 
         {/* Tech Stack Section */}
-        <section className={cn(layoutStyles.section, "max-w-4xl mx-auto px-4 bg-muted/30")}>
+        <section
+          className={cn(
+            layoutStyles.section,
+            "mx-auto max-w-4xl bg-muted/30 px-4"
+          )}
+        >
           <h2 className={cn(typographyStyles.h3, "mb-12 text-center")}>
             Tech Stack
           </h2>
@@ -609,10 +632,7 @@ export default function InvestorsEngineCaseStudy() {
             className={layoutStyles.gridCols2}
           >
             {techCategories.map((category) => (
-              <motion.div
-                key={category.category}
-                variants={fadeInUp}
-              >
+              <motion.div key={category.category} variants={fadeInUp}>
                 <Card className="p-6">
                   <h3 className={cn(typographyStyles.h6, "mb-4")}>
                     {category.category}
@@ -631,7 +651,7 @@ export default function InvestorsEngineCaseStudy() {
         </section>
 
         {/* Results & Impact Section */}
-        <section className={cn(layoutStyles.section, "max-w-6xl mx-auto px-4")}>
+        <section className={cn(layoutStyles.section, "mx-auto max-w-6xl px-4")}>
           <h2 className={cn(typographyStyles.h3, "mb-12 text-center")}>
             Results & Impact
           </h2>
@@ -644,10 +664,7 @@ export default function InvestorsEngineCaseStudy() {
             className={layoutStyles.gridCols3}
           >
             {results.map((result) => (
-              <motion.div
-                key={result.category}
-                variants={fadeInUp}
-              >
+              <motion.div key={result.category} variants={fadeInUp}>
                 <Card className="p-6">
                   <h3 className={cn(typographyStyles.h6, "mb-4")}>
                     {result.category}
@@ -655,7 +672,7 @@ export default function InvestorsEngineCaseStudy() {
                   <ul className="space-y-3">
                     {result.items.map((item) => (
                       <li key={item} className="flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
+                        <span className="mt-1 text-primary">•</span>
                         <span className={typographyStyles.body}>{item}</span>
                       </li>
                     ))}
@@ -667,7 +684,12 @@ export default function InvestorsEngineCaseStudy() {
         </section>
 
         {/* Lessons Learned Section */}
-        <section className={cn(layoutStyles.section, "max-w-4xl mx-auto px-4 bg-muted/30")}>
+        <section
+          className={cn(
+            layoutStyles.section,
+            "mx-auto max-w-4xl bg-muted/30 px-4"
+          )}
+        >
           <h2 className={cn(typographyStyles.h3, "mb-12 text-center")}>
             Lessons Learned
           </h2>
@@ -685,7 +707,7 @@ export default function InvestorsEngineCaseStudy() {
                 variants={fadeInUp}
                 className="flex gap-6"
               >
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
                   {lesson.number}
                 </div>
                 <div>
@@ -702,7 +724,7 @@ export default function InvestorsEngineCaseStudy() {
         </section>
 
         {/* Screenshots Gallery */}
-        <section className={cn(layoutStyles.section, "max-w-6xl mx-auto px-4")}>
+        <section className={cn(layoutStyles.section, "mx-auto max-w-6xl px-4")}>
           <h2 className={cn(typographyStyles.h3, "mb-12 text-center")}>
             Gallery
           </h2>
@@ -715,10 +737,7 @@ export default function InvestorsEngineCaseStudy() {
             className={layoutStyles.gridCols2}
           >
             {screenshots.map((screenshot) => (
-              <motion.div
-                key={screenshot.title}
-                variants={fadeInUp}
-              >
+              <motion.div key={screenshot.title} variants={fadeInUp}>
                 <Card className="overflow-hidden">
                   <div className="aspect-video">
                     <PlaceholderImage
@@ -727,7 +746,9 @@ export default function InvestorsEngineCaseStudy() {
                     />
                   </div>
                   <div className="p-4">
-                    <p className={cn(typographyStyles.bodySmall, "text-center")}>
+                    <p
+                      className={cn(typographyStyles.bodySmall, "text-center")}
+                    >
                       {screenshot.caption}
                     </p>
                   </div>
@@ -749,7 +770,7 @@ export default function InvestorsEngineCaseStudy() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="max-w-4xl mx-auto px-4 text-center"
+            className="mx-auto max-w-4xl px-4 text-center"
           >
             <motion.h2
               variants={fadeInUp}
@@ -766,7 +787,7 @@ export default function InvestorsEngineCaseStudy() {
 
             <motion.div
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col justify-center gap-4 sm:flex-row"
             >
               <Button
                 variant="secondary"
@@ -774,9 +795,7 @@ export default function InvestorsEngineCaseStudy() {
                 className="bg-white text-black hover:bg-gray-100"
                 asChild
               >
-                <Link href="/#projects">
-                  View More Projects
-                </Link>
+                <Link href="/#projects">View More Projects</Link>
               </Button>
               <Button
                 variant="ghost"

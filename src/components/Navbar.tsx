@@ -43,30 +43,30 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         scrolled || isMenuOpen
-          ? "bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg"
+          ? "bg-white/80 shadow-lg backdrop-blur-md dark:bg-black/80"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
-        <nav className="flex items-center justify-between h-16">
+        <nav className="flex h-16 items-center justify-between">
           <Link
             href="/"
-            className="text-xl font-bold text-foreground hover:text-muted-foreground transition-colors"
+            className="text-xl font-bold text-foreground transition-colors hover:text-muted-foreground"
           >
             Adnan Sadar
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden items-center gap-6 md:flex">
             <ul className="flex items-center gap-6">
               {navItems.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
                     className={cn(
-                      "text-muted-foreground hover:text-foreground transition-colors",
+                      "text-muted-foreground transition-colors hover:text-foreground",
                       activeSection === item.href.slice(1) &&
                         "underline decoration-2 underline-offset-4"
                     )}
@@ -84,12 +84,12 @@ export default function Navbar() {
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="p-2 text-muted-foreground transition-colors hover:text-foreground"
               aria-label="Toggle menu"
             >
               <FontAwesomeIcon
                 icon={isMenuOpen ? faXmark : faBars}
-                className="w-6 h-6"
+                className="h-6 w-6"
               />
             </button>
           </div>
@@ -101,7 +101,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden py-4"
+            className="py-4 md:hidden"
           >
             <ul className="flex flex-col gap-4">
               {navItems.map((item) => (
@@ -109,7 +109,7 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "block text-muted-foreground hover:text-foreground transition-colors",
+                      "block text-muted-foreground transition-colors hover:text-foreground",
                       activeSection === item.href.slice(1) &&
                         "underline decoration-2 underline-offset-4"
                     )}
