@@ -14,17 +14,20 @@ import { Card } from "@/components/ui/card";
 // List of work experiences
 const experiences = [
   {
-    title: "Lead Frontend Engineer",
-    company: "FoundersHub AI",
-    period: "June 2025 - November 2025",
+    title: "Founding Software Engineer",
+    company: "Investors Engine",
+    period: "February 2025 - July 2026",
     points: [
-      "Executed comprehensive frontend architecture revamp, reducing build times by 50% and improving application performance by 20% through strategic code splitting, SCSS design tokens, and DRY principles.",
-      "Implemented agentic AI workflows using Cursor AI and Claude Code subagents, streamlining design iterations, development cycles, and automated code reviews.",
+      "Built an investment research platform displaying financial data for 10,000+ US stocks, historical ratios, and advanced charting tools. User portfolio and watchlist notifications system using web sockets also featured.",
+      "Built and managed the platform infrastructure using Docker Compose to orchestrate containerized backend, frontend, shared services, and Redis, with NGINX for proxying and reliability. Integrated Cloudflare Workers for edge routing and optimized deployments.",
+      "Setup OpenClaw for automated testing, news and reporting results using Discord webhook.",
+      "Created a Google Sheets extension to extend the use of financials, ratios and other key metrics API data for users.",
+      "Executed comprehensive frontend architecture revamp by migrating to TailwindCSS and performing code cleanup, reducing FE bundle build time and improving application rendering performance through code splitting and design tokens.",
     ],
   },
   {
     title: "Senior Software Engineer",
-    company: "PeopleBlox",
+    company: "LitmusBlox",
     period: "June 2022 - June 2024",
     points: [
       "Led a frontend team of 5 developers as a founding engineer to design and deliver PeopleBlox, a competency assessment tool, achieving a significant reduction in employee evaluation time using Next.js, React, TypeScript, Redux, and RTK Query.",

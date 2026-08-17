@@ -34,32 +34,12 @@ const PlaceholderImage = ({
 };
 
 const getProjectEmoji = (title: string): string => {
-  if (title.includes("Investors")) return "📊";
   if (title.includes("Scholar")) return "🏠";
   if (title.includes("PeopleBlox")) return "👥";
   return "💻";
 };
 
 const projects = [
-  {
-    title: "Investors Engine",
-    description:
-      "An investment research platform displaying financial data for 10,000+ US stocks with advanced charting tools. Built a responsive UI with complex data visualizations, custom tables, and real-time portfolio tracking.",
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "React Query",
-      "Redux",
-      "Material UI",
-      "Apache ECharts",
-    ],
-    github: "",
-    live: "https://investorsengine.com/",
-    period: "February 2025 - May 2025",
-    screenshot: "/projects_investors_engine.png",
-    featured: true,
-    caseStudyUrl: "/projects/investors-engine",
-  },
   {
     title: "Scholar Housing",
     description:
