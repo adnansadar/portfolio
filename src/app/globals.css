@@ -1,26 +1,218 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Monochrome ink ramp — the design has no accent colour, only these greys. */
+  --color-ink-100: #d5dae0;
+  --color-ink-200: #b7bec7;
+  --color-ink-300: #98a0a9;
+  --color-ink-400: #868d97;
+  --color-ink-500: #7b828b;
+  --color-ink-600: #6e747e;
+  --color-ink-700: #5c636d;
+  --color-ink-800: #42474f;
+  --color-ink-900: #3e444c;
+
+  --color-panel: #0d0f13;
+  --color-panel-alt: #0a0b0e;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --animate-pulse-dot: pulse-dot 1.6s ease-in-out infinite;
+  --animate-caret: caret 1s step-end infinite;
+  --animate-drift-slow: drift 26s ease-in-out infinite;
+  --animate-drift-slower: drift 34s ease-in-out infinite reverse;
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+  }
+  @keyframes caret {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes drift {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(3%, -4%, 0) scale(1.08);
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+ * Dark-only site. The palette lives in :root so it applies with or without the
+ * `.dark` class, and `.dark` mirrors it so shadcn's dark: variants stay coherent.
+ */
+:root {
+  color-scheme: dark;
+
+  --font-sans: Satoshi, "Helvetica Neue", Helvetica, ui-sans-serif, system-ui,
+    sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo,
+    monospace;
+
+  --background: #07080a;
+  --foreground: #f1f3f6;
+  --card: #0d0f13;
+  --card-foreground: #f1f3f6;
+  --popover: #0d0f13;
+  --popover-foreground: #f1f3f6;
+  --primary: #f1f3f6;
+  --primary-foreground: #07080a;
+  --secondary: #14171c;
+  --secondary-foreground: #f1f3f6;
+  --muted: #0a0b0e;
+  --muted-foreground: #868d97;
+  --accent: #14171c;
+  --accent-foreground: #f1f3f6;
+  --destructive: oklch(0.704 0.191 22.216);
+
+  /* Alpha-on-white borders, in oklch so `border-border/50` still works. */
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 11%);
+  --ring: oklch(1 0 0 / 42%);
+
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: #07080a;
+  --foreground: #f1f3f6;
+  --card: #0d0f13;
+  --card-foreground: #f1f3f6;
+  --popover: #0d0f13;
+  --popover-foreground: #f1f3f6;
+  --primary: #f1f3f6;
+  --primary-foreground: #07080a;
+  --secondary: #14171c;
+  --secondary-foreground: #f1f3f6;
+  --muted: #0a0b0e;
+  --muted-foreground: #868d97;
+  --accent: #14171c;
+  --accent-foreground: #f1f3f6;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 11%);
+  --ring: oklch(1 0 0 / 42%);
+}
+
+/* The gradient fill shared by ~15 bordered panels across the page. */
+@utility panel {
+  background-image: linear-gradient(180deg, #0d0f13, #0a0b0e);
+}
+
+/* The page's standard centred column + fluid gutters. */
+@utility shell {
+  margin-inline: auto;
+  max-width: 1400px;
+  padding-inline: clamp(20px, 5vw, 56px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply font-sans;
+    background: var(--background);
+    scroll-behavior: smooth;
+    /* Clears the fixed pill nav when jumping to #work, #about, etc. */
+    scroll-padding-top: 110px;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    /* The ambient layer is fixed and full-bleed; never let it widen the page. */
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #f1f3f6;
+    color: #07080a;
+  }
+
+  /*
+   * shadcn's primitives ship `outline-none`; restore a visible ring so the
+   * dark theme stays keyboard-navigable.
+   */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #07080a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #22262c;
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3e444c;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
