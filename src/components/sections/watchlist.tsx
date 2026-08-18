@@ -48,13 +48,6 @@ export function Watchlist() {
     <div className="panel rounded-[18px] border border-white/10 p-[clamp(18px,2.4vw,24px)]">
       <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-white/[0.08] pb-3">
         <div className="text-[15px] font-bold">Watchlist — live</div>
-        <div className="flex items-center gap-[7px] font-mono text-[10.5px] tracking-[0.06em] text-ink-400">
-          <span
-            aria-hidden
-            className="animate-pulse-dot size-1.5 rounded-full bg-foreground"
-          />
-          WS CONNECTED
-        </div>
       </div>
 
       <ul className="list-none">
@@ -106,7 +99,7 @@ export function Watchlist() {
                     <span
                       className={cn(
                         "w-[70px] shrink-0 text-right font-mono text-[12.5px]",
-                        up ? "text-foreground" : "text-ink-500"
+                        up ? "text-up" : "text-down"
                       )}
                     >
                       {price}
@@ -114,11 +107,11 @@ export function Watchlist() {
                     <span
                       className={cn(
                         "w-14 shrink-0 text-right font-mono text-[11.5px]",
-                        up ? "text-foreground" : "text-ink-500"
+                        up ? "text-up" : "text-down"
                       )}
                     >
-                      {up ? "+" : ""}
-                      {change.toFixed(2)}%
+                      {up ? "+" : "−"}
+                      {Math.abs(change).toFixed(2)}%
                     </span>
                   </CollapsibleTrigger>
 

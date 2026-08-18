@@ -41,6 +41,14 @@
   --color-panel: #0d0f13;
   --color-panel-alt: #0a0b0e;
 
+  /*
+   * The only colour on an otherwise monochrome site, reserved for live market
+   * direction in the watchlist. Tuned for dark backgrounds — the +/− sign still
+   * carries the meaning on its own, so colour is never the sole signal.
+   */
+  --color-up: #3fb950;
+  --color-down: #f85149;
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -49,7 +57,6 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --animate-pulse-dot: pulse-dot 1.6s ease-in-out infinite;
   --animate-caret: caret 1s step-end infinite;
   --animate-drift-slow: drift 26s ease-in-out infinite;
   --animate-drift-slower: drift 34s ease-in-out infinite reverse;
@@ -69,15 +76,6 @@
     }
   }
 
-  @keyframes pulse-dot {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.2;
-    }
-  }
   @keyframes caret {
     0%,
     49% {
