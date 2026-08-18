@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     title: `${site.name} — ${site.role}`,
     description:
       "Scalable frontend architecture, real-time data interfaces, and design systems. Five years shipping product, two leading the frontend.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    // Image comes from app/opengraph-image.tsx, which Next wires up for both
+    // og:image and twitter:image.
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — ${site.role}`,
     description:
       "Scalable frontend architecture, real-time data interfaces, and design systems.",
-    images: ["/og-image.jpg"],
   },
 };
 
