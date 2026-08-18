@@ -2,35 +2,90 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { useReducedMotion } from "motion/react";
 
 import { Reveal } from "@/components/motion/reveal";
 import {
-  GALLERY_INTERVAL_MS,
+  MARQUEE_SECONDS,
   gallery,
   galleryEyebrow,
+  type Slide,
 } from "@/content/gallery";
 import { cn } from "@/lib/utils";
 
-const pad = (n: number) => String(n).padStart(2, "0");
+/** Trailing margin, not a flex gap — see the `tape` keyframe comment. */
+const CARD_GAP = "me-5";
 
+function Card({ slide, hidden }: { slide: Slide; hidden?: boolean }) {
+  return (
+    <figure
+      // Height comes from the track; width follows the photo's own ratio, so
+      // portrait and landscape shots sit side by side with nothing cropped.
+      style={{ aspectRatio: `${slide.width} / ${slide.height}` }}
+      className={cn(
+        "group relative h-full shrink-0 snap-start overflow-hidden rounded-2xl border border-white/[0.09] bg-panel",
+        CARD_GAP
+      )}
+      aria-hidden={hidden}
+    >
+      <Image
+        src={slide.src}
+        alt={hidden ? "" : slide.alt}
+        fill
+        sizes="(max-width: 700px) 70vw, 30vw"
+        className="object-cover brightness-105 contrast-110 grayscale transition-[filter] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0"
+      />
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(7,8,10,0) 42%, rgba(7,8,10,.62) 74%, rgba(7,8,10,.94) 100%)",
+        }}
+      />
+
+      <figcaption className="absolute inset-x-0 bottom-0 p-4">
+        <div className="text-[15px] leading-tight font-bold tracking-[-0.01em]">
+          {slide.title}
+        </div>
+        <div className="mt-1 text-[12.5px] leading-snug text-ink-200">
+          {slide.caption}
+        </div>
+      </figcaption>
+    </figure>
+  );
+}
+
+/**
+ * A continuously drifting strip of photos — the personality break between the
+ * case studies and the writing.
+ *
+ * Replaces the mockup's full-bleed 100vh slideshow, which assumed landscape
+ * photos; these are mostly 3:4 portraits and a 16:9 cover crop threw away well
+ * over half of each frame.
+ *
+ * Server-renders as a plain scroll-snap row, then upgrades to the marquee on
+ * pointer devices. That order means the no-JS, touch and reduced-motion paths
+ * all get the same usable, swipeable strip.
+ */
 export function Gallery() {
-  const [index, setIndex] = React.useState(0);
+  const [marquee, setMarquee] = React.useState(false);
   const [paused, setPaused] = React.useState(false);
-  const reduced = useReducedMotion();
 
   React.useEffect(() => {
-    if (reduced || paused) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
-    const id = setInterval(
-      () => setIndex((i) => (i + 1) % gallery.length),
-      GALLERY_INTERVAL_MS
-    );
+    const evaluate = () => setMarquee(!reduced.matches && finePointer.matches);
+    evaluate();
 
-    return () => clearInterval(id);
-  }, [reduced, paused]);
-
-  const current = gallery[index];
+    reduced.addEventListener("change", evaluate);
+    finePointer.addEventListener("change", evaluate);
+    return () => {
+      reduced.removeEventListener("change", evaluate);
+      finePointer.removeEventListener("change", evaluate);
+    };
+  }, []);
 
   return (
     <Reveal
@@ -38,80 +93,53 @@ export function Gallery() {
       variant="splitIn"
       duration={1.2}
       amount={0.1}
-      className="relative h-screen overflow-hidden bg-background"
-      aria-roledescription="carousel"
-      aria-label="Photos from Buffalo and Niagara"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
+      className="relative overflow-hidden py-[clamp(56px,8vh,88px)]"
+      aria-label="Photos from Buffalo, Niagara and in between"
     >
-      {gallery.map((slide, i) => (
-        <div
-          key={slide.src}
-          aria-hidden={i !== index}
-          className={cn(
-            "absolute inset-0 transition-opacity duration-[1200ms] ease-[cubic-bezier(.4,0,.2,1)]",
-            i === index ? "opacity-100" : "opacity-0"
-          )}
-        >
-          <Image
-            src={slide.src}
-            alt={slide.alt}
-            fill
-            sizes="100vw"
-            priority={i === 0}
-            className={cn(
-              "object-cover transition-transform duration-[4600ms] ease-linear",
-              i === index && !reduced ? "scale-[1.06]" : "scale-100"
-            )}
-          />
-        </div>
-      ))}
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(7,8,10,.74) 0%, rgba(7,8,10,.14) 38%, rgba(7,8,10,.92) 100%)",
-        }}
-      />
-
-      <div className="absolute inset-x-0 top-0 flex flex-wrap justify-between gap-2.5 px-[clamp(20px,5vw,56px)] pt-[clamp(80px,12vh,110px)] font-mono text-[11.5px] tracking-[0.09em] text-foreground/70">
+      <div className="shell flex flex-wrap items-baseline justify-between gap-3 pb-6 font-mono text-[11.5px] tracking-[0.09em] text-ink-700">
         <span>{galleryEyebrow}</span>
-        <span>
-          {pad(index + 1)} / {pad(gallery.length)}
-        </span>
+        <span>{gallery.length} PHOTOS</span>
       </div>
 
-      <div className="absolute right-[clamp(20px,5vw,56px)] bottom-[clamp(28px,6vh,56px)] left-[clamp(20px,5vw,56px)] flex flex-wrap items-end justify-between gap-[22px]">
-        {/* Announces the slide change to screen readers without stealing focus. */}
-        <div className="max-w-[44ch]" aria-live="polite">
-          <div className="text-[clamp(20px,2.2vw,32px)] leading-[1.15] font-bold tracking-[-0.02em]">
-            {current.title}
-          </div>
-          <div className="mt-2 text-[14.5px] text-foreground/[0.66]">
-            {current.caption}
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {gallery.map((slide, i) => (
-            <button
-              key={slide.src}
-              type="button"
-              onClick={() => setIndex(i)}
-              aria-label={`Show photo ${i + 1} of ${gallery.length}: ${slide.title}`}
-              aria-current={i === index}
-              className={cn(
-                "h-1 cursor-pointer rounded-full transition-[width,background-color] duration-500",
-                i === index
-                  ? "w-[34px] bg-foreground"
-                  : "w-2.5 bg-foreground/30 hover:bg-foreground/60"
-              )}
-            />
+      <div
+        className={cn(
+          "h-[clamp(280px,42vh,440px)]",
+          marquee
+            ? "overflow-hidden"
+            : "snap-x snap-mandatory overflow-x-auto px-[clamp(20px,5vw,56px)]"
+        )}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={() => setPaused(false)}
+      >
+        <div
+          className={cn(
+            "flex h-full w-max",
+            marquee && "animate-tape",
+            marquee && paused && "[animation-play-state:paused]"
+          )}
+          style={
+            marquee
+              ? ({
+                  "--tape-duration": `${MARQUEE_SECONDS}s`,
+                } as React.CSSProperties)
+              : undefined
+          }
+        >
+          {gallery.map((slide) => (
+            <Card key={slide.src} slide={slide} />
           ))}
+
+          {/*
+            Second copy makes the -50% loop seamless. Hidden from assistive tech
+            so the photos aren't announced twice.
+          */}
+          {marquee
+            ? gallery.map((slide) => (
+                <Card key={`dup-${slide.src}`} slide={slide} hidden />
+              ))
+            : null}
         </div>
       </div>
     </Reveal>

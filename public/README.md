@@ -1,35 +1,38 @@
-# Photos to drop in here
+# Images
 
-Six images are referenced by the site but are **not** in the repo. They live in
-the Claude Design project and exceed the design API's 256 KiB per-file fetch
-cap, so they had to be left for a manual export.
+All present. Nothing to do here unless you're swapping photos.
 
-Export them from
-<https://claude.ai/design/p/8be10e99-7f22-4f78-9a3a-388043bd5eaf> (the
-`uploads/` folder) and save them here under **exactly** these names:
-
-| File | Used by | Shape |
+| File | Used by | Intrinsic size |
 | --- | --- | --- |
-| `hero.jpeg` | Hero portrait | Portrait / square. Focal point near the top — it is cropped at `object-position: 50% 22%` and rendered greyscale until hover. |
-| `gallery-01.jpg` | Gallery — Niagara Falls State Park | Landscape, full-bleed |
-| `gallery-02.jpg` | Gallery — Portrait by Niagara Falls | Landscape, full-bleed |
-| `gallery-03.jpg` | Gallery — UB South Campus | Landscape, full-bleed |
-| `gallery-04.jpg` | Gallery — Lake Erie cruise | Landscape, full-bleed |
-| `gallery-05.jpg` | Gallery — UB commencement | Landscape, full-bleed |
+| `hero.jpeg` | Hero portrait | 4975×7462 (2:3 portrait) |
+| `gallery-01.jpg` | Filmstrip — Niagara Falls State Park | 3072×4080 |
+| `gallery-02.jpg` | Filmstrip — Portrait by Niagara Falls | 3072×4080 |
+| `gallery-03.jpg` | Filmstrip — UB South Campus | 3072×4080 |
+| `gallery-04.jpg` | Filmstrip — Lake Erie cruise | 3072×4080 |
+| `gallery-05.jpg` | Filmstrip — UB commencement | 4080×3072 |
+| `gallery-06.png` | Filmstrip — Presenting at UB | 570×1008 |
+| `gallery-07.jpg` | Filmstrip — Gorge trail | 3072×4080 |
+| `gallery-08.jpg` | Filmstrip — First snow | 2458×3264 |
+| `gallery-09.jpg` | Filmstrip — Hills at sunset | 4608×3456 |
+| `gallery-10.jpg` | Filmstrip — By the water | 3000×4000 |
+| `resume.pdf` | All four Download Resume buttons | — |
+| `og-image.jpg` | Social card | — |
 
-The gallery slides are `100vw × 100vh` covers, so anything ~2400px wide is
-plenty — `next/image` handles the resizing from there.
+## Swapping or adding a photo
 
-**Until these exist**, the hero frame and the gallery render as empty dark
-boxes and `/_next/image` returns 400 for each. Nothing else on the page is
-affected, and no code change is needed once the files land.
+Each slide's intrinsic `width` and `height` are recorded in
+[`src/content/gallery.ts`](../src/content/gallery.ts) — the filmstrip uses them
+to set each card's `aspect-ratio`, which is what lets portrait and landscape
+photos sit in one row uncropped. **If you replace a file, update its
+width/height there too**, or that card will be the wrong shape.
 
-Alt text and captions are already written, in
-[`src/content/gallery.ts`](../src/content/gallery.ts) and
-[`src/content/site.ts`](../src/content/site.ts).
+Mixed orientations are fine by design. `gallery-06` is a 9:16 phone still and
+renders as a narrow card — that variation is the point.
 
-## Already here
+## A note on sizes
 
-- `resume.pdf` — pulled from the design project, linked by all four Download
-  Resume buttons.
-- `og-image.jpg` — carried over from the previous portfolio.
+These are camera originals (~38 MB total, hero.jpeg is 37 megapixels).
+`next/image` resizes on request, so visitors never download them at full size —
+a 1920px hero comes out around 165 KB. The cost is repo weight and a slower
+first request per unique size. Resizing the long edges to ~2400px would cut the
+folder to 2–3 MB with no visible difference; left as-is deliberately.
