@@ -63,7 +63,7 @@ export const gallery: Slide[] = [
     height: 1008,
     alt: "Adnan presenting at a podium in a University at Buffalo lecture hall",
     title: "Presenting at UB",
-    caption: "Talking through a project in a Davis Hall lecture theatre.",
+    caption: "Mid-sentence at the podium, University at Buffalo.",
   },
   {
     src: "/gallery-07.jpg",
