@@ -10,6 +10,10 @@ import {
   TYPE_INTERVAL_MS,
 } from "@/content/code-sample";
 import { useIsomorphicLayoutEffect } from "@/lib/use-isomorphic-layout-effect";
+import { sliceTokens, tokenize } from "@/lib/highlight";
+
+/** Tokenized once at module load — the snippet never changes. */
+const TOKENS = tokenize(CODE_SAMPLE);
 
 /**
  * The looping typewriter in the PeopleBlox case study, in a fake editor chrome.
@@ -38,7 +42,7 @@ export function TypedCode() {
     return () => clearInterval(id);
   }, [reduced]);
 
-  const shown = reduced ? CODE_SAMPLE : CODE_SAMPLE.slice(0, count);
+  const shown = reduced ? TOKENS : sliceTokens(TOKENS, count);
 
   return (
     <div className="panel rounded-[18px] border border-white/[0.09] px-[clamp(22px,3vw,32px)] py-[clamp(22px,3vw,30px)]">
@@ -60,8 +64,14 @@ export function TypedCode() {
           min-height holds the panel steady while the text types in, so the
           blocks below it never shift.
         */}
-        <pre className="mt-3 min-h-[196px] font-mono text-xs leading-[1.65] break-words whitespace-pre-wrap text-ink-200">
-          <code>{shown}</code>
+        <pre className="mt-3 min-h-[196px] font-mono text-xs leading-[1.65] break-words whitespace-pre-wrap text-[#D4D4D4]">
+          <code>
+            {shown.map((token, i) => (
+              <span key={i} style={{ color: token.color }}>
+                {token.text}
+              </span>
+            ))}
+          </code>
           {reduced ? null : (
             <span
               aria-hidden
