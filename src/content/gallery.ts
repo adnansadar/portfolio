@@ -13,8 +13,9 @@ export type Slide = {
  * fixed height and lets the width follow the aspect ratio, so the varied
  * shapes read as intentional rather than as bad crops.
  *
- * Titles and captions for 01–05 come from the design. Those for 06–10 were
- * written from the photos themselves — worth a pass to correct the locations.
+ * Titles and captions for 01–05 come from the design; 07 and 10 were confirmed
+ * by Adnan. Those for 06, 08 and 09 were written from the photos themselves and
+ * are still worth a pass for location accuracy.
  */
 export const gallery: Slide[] = [
   {
@@ -69,9 +70,9 @@ export const gallery: Slide[] = [
     src: "/gallery-07.jpg",
     width: 3072,
     height: 4080,
-    alt: "Adnan standing in front of a layered shale waterfall in an autumn gorge",
-    title: "Gorge trail",
-    caption: "Shale ledges and a thin waterfall, late in the season.",
+    alt: "Adnan at Eternal Flame Falls, a natural gas flame burning in a grotto behind the falling water",
+    title: "Eternal Flame Falls",
+    caption: "Buffalo, NY — the flame still going behind the water.",
   },
   {
     src: "/gallery-08.jpg",
@@ -93,9 +94,9 @@ export const gallery: Slide[] = [
     src: "/gallery-10.jpg",
     width: 3000,
     height: 4000,
-    alt: "Adnan by a lake on a clear day, a white monument on the far bank",
-    title: "By the water",
-    caption: "Blue sky, still water, a monument on the far bank.",
+    alt: "Adnan beside Lake LaSalle on the University at Buffalo North Campus, the lake fountain visible across the water",
+    title: "Lake LaSalle",
+    caption: "UB North Campus, the fountain out on the water.",
   },
 ];
 

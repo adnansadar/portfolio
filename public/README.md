@@ -11,10 +11,10 @@ All present. Nothing to do here unless you're swapping photos.
 | `gallery-04.jpg` | Filmstrip — Lake Erie cruise | 3072×4080 |
 | `gallery-05.jpg` | Filmstrip — UB commencement | 4080×3072 |
 | `gallery-06.png` | Filmstrip — Presenting at UB | 570×1008 |
-| `gallery-07.jpg` | Filmstrip — Gorge trail | 3072×4080 |
+| `gallery-07.jpg` | Filmstrip — Eternal Flame Falls | 3072×4080 |
 | `gallery-08.jpg` | Filmstrip — First snow | 2458×3264 |
 | `gallery-09.jpg` | Filmstrip — Hills at sunset | 4608×3456 |
-| `gallery-10.jpg` | Filmstrip — By the water | 3000×4000 |
+| `gallery-10.jpg` | Filmstrip — Lake LaSalle | 3000×4000 |
 | `resume.pdf` | All four Download Resume buttons | — |
 | `og-image.jpg` | Social card | — |
 
