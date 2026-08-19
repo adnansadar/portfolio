@@ -3,7 +3,6 @@
 import Link from "next/link";
 
 import { Reveal } from "@/components/motion/reveal";
-import { ResumeButton } from "@/components/resume-button";
 import { Button } from "@/components/ui/button";
 import { about } from "@/content/site";
 import { skills } from "@/content/skills";
@@ -32,7 +31,6 @@ export function About() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3.5">
-            <ResumeButton size="cta" className="text-[15.5px] font-bold" />
             <Button
               asChild
               variant="outline"

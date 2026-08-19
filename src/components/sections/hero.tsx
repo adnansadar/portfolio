@@ -96,7 +96,7 @@ export function Hero() {
               fill
               priority
               sizes="(max-width: 900px) 100vw, 50vw"
-              className="object-cover object-[50%_22%] brightness-105 contrast-[1.34] grayscale transition-[filter] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:brightness-100 group-hover:contrast-110 group-hover:saturate-105 group-hover:grayscale-0"
+              className="object-cover object-[50%_22%] brightness-105 contrast-[1.34] grayscale transition-[filter] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:brightness-100 group-hover:contrast-110 group-hover:saturate-105 group-hover:grayscale-0 touch:brightness-100 touch:contrast-110 touch:saturate-105 touch:grayscale-0"
             />
           </motion.div>
           <div

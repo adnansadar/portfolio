@@ -4,6 +4,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Touch devices have no :hover, so any treatment that only lifts on hover is
+ * unreachable there — the photos would stay greyscale forever. `touch:` lets
+ * those elements ship the revealed state as their resting state instead.
+ */
+@custom-variant touch (@media (hover: none));
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

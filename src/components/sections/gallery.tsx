@@ -11,6 +11,7 @@ import {
   type Slide,
 } from "@/content/gallery";
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/lib/use-media-query";
 
 /** Trailing margin, not a flex gap — see the `tape` keyframe comment. */
 const CARD_GAP = "me-5";
@@ -32,7 +33,7 @@ function Card({ slide, hidden }: { slide: Slide; hidden?: boolean }) {
         alt={hidden ? "" : slide.alt}
         fill
         sizes="(max-width: 700px) 70vw, 30vw"
-        className="object-cover brightness-105 contrast-110 grayscale transition-[filter] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0"
+        className="object-cover brightness-105 contrast-110 grayscale transition-[filter] duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:brightness-100 group-hover:contrast-100 group-hover:grayscale-0 touch:brightness-100 touch:contrast-100 touch:grayscale-0"
       />
 
       <div
@@ -64,28 +65,18 @@ function Card({ slide, hidden }: { slide: Slide; hidden?: boolean }) {
  * photos; these are mostly 3:4 portraits and a 16:9 cover crop threw away well
  * over half of each frame.
  *
- * Server-renders as a plain scroll-snap row, then upgrades to the marquee on
- * pointer devices. That order means the no-JS, touch and reduced-motion paths
- * all get the same usable, swipeable strip.
+ * Server-renders as a plain scroll-snap row, then upgrades to the marquee once
+ * JS confirms motion is welcome. That order keeps the no-JS and reduced-motion
+ * paths on the usable, swipeable strip.
  */
 export function Gallery() {
-  const [marquee, setMarquee] = React.useState(false);
+  /*
+   * Touch devices drift too. This used to also require `(pointer: fine)`, which
+   * a phone never reports, so the strip sat motionless there — reduced motion
+   * is the only thing that holds it still now.
+   */
+  const marquee = useMediaQuery("(prefers-reduced-motion: no-preference)");
   const [paused, setPaused] = React.useState(false);
-
-  React.useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-
-    const evaluate = () => setMarquee(!reduced.matches && finePointer.matches);
-    evaluate();
-
-    reduced.addEventListener("change", evaluate);
-    finePointer.addEventListener("change", evaluate);
-    return () => {
-      reduced.removeEventListener("change", evaluate);
-      finePointer.removeEventListener("change", evaluate);
-    };
-  }, []);
 
   return (
     <Reveal
