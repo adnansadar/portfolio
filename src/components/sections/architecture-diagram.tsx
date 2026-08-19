@@ -13,8 +13,11 @@ function Connector() {
 }
 
 /**
- * The little stacked system diagram in each case study's sticky column.
+ * The stacked system diagram opening each case study on /case-studies.
  * Deliberately hand-rolled: it is a bespoke composition, not a UI primitive.
+ *
+ * Carries no panel chrome or margin of its own — it is laid out as one block
+ * among several, and takes the shared panel treatment from its container.
  */
 export function ArchitectureDiagram({
   eyebrow,
@@ -26,8 +29,9 @@ export function ArchitectureDiagram({
   footnote: string;
 }) {
   return (
-    <div className="panel mt-7 rounded-2xl border border-white/[0.09] p-[22px]">
-      <div className="font-mono text-[11px] tracking-[0.08em] text-ink-700">
+    <>
+      {/* Matches the eyebrow on the prose block it now sits beside. */}
+      <div className="font-mono text-[11px] tracking-[0.08em] text-ink-400">
         {eyebrow}
       </div>
 
@@ -61,6 +65,6 @@ export function ArchitectureDiagram({
 
         <div className="mt-1.5 text-[11px] text-ink-700">{footnote}</div>
       </div>
-    </div>
+    </>
   );
 }

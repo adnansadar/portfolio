@@ -42,6 +42,8 @@ export type CaseStudyBlock =
 
 export type CaseStudy = {
   index: string;
+  /** Anchor id on /case-studies, and the deep-link target from the homepage. */
+  slug: string;
   title: string;
   meta: string;
   /** One source for both the browser title bar and the Visit button. */
@@ -55,9 +57,21 @@ export type CaseStudy = {
   blocks: CaseStudyBlock[];
 };
 
+/**
+ * The blocks the homepage keeps: the screenshot, the live widget and the
+ * numbers. The narrative blocks — `prose` and `list` — plus the architecture
+ * diagram are left to /case-studies, which renders every study in full.
+ */
+export const SUMMARY_BLOCK_KINDS = new Set<CaseStudyBlock["kind"]>([
+  "shot",
+  "widget",
+  "metrics",
+]);
+
 export const caseStudies: CaseStudy[] = [
   {
     index: "01",
+    slug: "investors-engine",
     title: "Investors Engine",
     meta: "Founding Software Engineer · Feb 2025 – Jul 2026 · Full-stack investment research platform",
     site: { href: "https://investorsengine.com", domain: "investorsengine.com" },
@@ -84,8 +98,15 @@ export const caseStudies: CaseStudy[] = [
       "Docker Compose",
     ],
     blocks: [
-      // The real product first, then the widget built to illustrate how its
-      // live data moves.
+      // The problem, then the real product, then the widget built to
+      // illustrate how its live data moves. Both studies open on their prose
+      // block so /case-studies pairs it with the architecture diagram; the
+      // homepage filters prose out and still leads with the screenshot.
+      {
+        kind: "prose",
+        eyebrow: "THE CHALLENGE",
+        body: "Retail investors needed institutional-grade research: ten years of ratios for 10,000+ US equities, advanced charting, and portfolio alerts that fire the moment the market moves — on a solo-engineer budget.",
+      },
       {
         kind: "shot",
         shot: {
@@ -98,11 +119,6 @@ export const caseStudies: CaseStudy[] = [
         },
       },
       { kind: "widget", widget: "watchlist" },
-      {
-        kind: "prose",
-        eyebrow: "THE CHALLENGE",
-        body: "Retail investors needed institutional-grade research: ten years of ratios for 10,000+ US equities, advanced charting, and portfolio alerts that fire the moment the market moves — on a solo-engineer budget.",
-      },
       {
         kind: "list",
         eyebrow: "THE ARCHITECTURE DECISIONS",
@@ -132,6 +148,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     index: "02",
+    slug: "peopleblox",
     title: "PeopleBlox",
     meta: "Senior Software Engineer, LitmusBlox · Jun 2022 – May 2024 · Competency assessment platform",
     site: { href: "https://peopleblox.io/", domain: "peopleblox.io" },
@@ -194,7 +211,16 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
+/** The homepage section header. */
 export const caseStudiesHeading = {
   title: "Deep-dive case studies",
   meta: "SYSTEM DESIGN · ARCHITECTURE · OUTCOMES",
+} as const;
+
+/** The /case-studies page header. */
+export const caseStudiesPage = {
+  eyebrow: "/ CASE STUDIES",
+  title: "Deep-dive case studies",
+  blurb:
+    "The systems behind both products in full — the architecture, the constraints that shaped it, the decisions I'd defend, and what shipped.",
 } as const;

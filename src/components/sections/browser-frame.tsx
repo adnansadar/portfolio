@@ -11,8 +11,8 @@ import type { Shot } from "@/content/case-studies";
  * bar plus hairline border is what keeps the bright PeopleBlox marketing page
  * from reading as a hole punched in a near-black layout.
  *
- * The domain here is a label, not a link. The Visit button in the sticky column
- * is the single affordance, so there's one obvious way through to the site.
+ * The domain here is a label, not a link. The Visit button in the study's header
+ * band is the single affordance, so there's one obvious way through to the site.
  */
 export function BrowserFrame({ shot, domain }: { shot: Shot; domain: string }) {
   return (
@@ -28,11 +28,17 @@ export function BrowserFrame({ shot, domain }: { shot: Shot; domain: string }) {
           className="relative mt-3 overflow-hidden rounded-lg border border-white/[0.07]"
           style={{ aspectRatio: `${shot.width} / ${shot.height}` }}
         >
+          {/*
+            The frame spans the full `shell`, so the hint tracks it:
+            min(viewport, 1400px) − 2 × clamp(20px, 5vw, 56px). Left at the old
+            half-column `45vw` the browser would pick a candidate at half the
+            resolution the frame now renders at.
+          */}
           <Image
             src={shot.src}
             alt={shot.alt}
             fill
-            sizes="(max-width: 900px) 100vw, 45vw"
+            sizes="(min-width: 1400px) 1288px, (min-width: 1120px) calc(100vw - 112px), 90vw"
             className="object-cover object-top"
           />
         </div>

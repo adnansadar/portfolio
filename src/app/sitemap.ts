@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: site.url, lastModified, priority: 1 },
+    { url: `${site.url}/case-studies`, lastModified, priority: 0.8 },
     { url: `${site.url}/blog`, lastModified, priority: 0.7 },
   ];
 }
