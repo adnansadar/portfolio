@@ -17,7 +17,7 @@ const GLOW: Record<Size, string> = {
 };
 
 /**
- * The white download CTA, which appears four times across the page. Carries the
+ * The white download CTA, used in the hero and the contact section. Carries the
  * magnetic pull and the outward glow that make it the loudest element on a
  * page with no accent colour.
  */

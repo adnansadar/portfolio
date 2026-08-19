@@ -1,5 +1,26 @@
 # Images
 
+## ⚠ Two case-study screenshots still needed
+
+These are referenced by the browser frames in the case studies but are **not in
+the repo yet** — save them here under exactly these names:
+
+| File | What it is | Size |
+| --- | --- | --- |
+| `shot-investors-engine.png` | The Investors Engine dashboard (NVDA overview) | 2552×1342 |
+| `shot-peopleblox.png` | The peopleblox.io product site homepage | 2554×1353 |
+
+PNG keeps the UI text crisp; `next/image` re-encodes to WebP/AVIF on delivery,
+so the source format only affects repo weight. If you save at a different size,
+update `width`/`height` on the matching `shot` in
+[`src/content/case-studies.ts`](../src/content/case-studies.ts) — those numbers
+set the frame's aspect ratio.
+
+Until they land, both frames render as empty dark boxes and `/_next/image`
+returns 400 for them. Nothing else on the page is affected.
+
+## Photos
+
 All present. Nothing to do here unless you're swapping photos.
 
 | File | Used by | Intrinsic size |

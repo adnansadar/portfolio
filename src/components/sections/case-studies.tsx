@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
-
 import { ArchitectureDiagram } from "@/components/sections/architecture-diagram";
+import { BrowserFrame } from "@/components/sections/browser-frame";
 import { TypedCode } from "@/components/sections/typed-code";
 import { Watchlist } from "@/components/sections/watchlist";
 import { CountUp } from "@/components/motion/count-up";
@@ -47,11 +46,24 @@ function MetricCard({ metric }: { metric: Metric }) {
   );
 }
 
-function Block({ block }: { block: CaseStudyBlock }) {
+function Block({
+  block,
+  site,
+}: {
+  block: CaseStudyBlock;
+  site: CaseStudy["site"];
+}) {
   switch (block.kind) {
     case "widget":
       return (
         <Reveal>{block.widget === "watchlist" ? <Watchlist /> : <TypedCode />}</Reveal>
+      );
+
+    case "shot":
+      return (
+        <Reveal>
+          <BrowserFrame shot={block.shot} domain={site.domain} />
+        </Reveal>
       );
 
     case "prose":
@@ -91,17 +103,6 @@ function Block({ block }: { block: CaseStudyBlock }) {
         </div>
       );
 
-    case "cta":
-      return (
-        <Button
-          asChild
-          variant="outline"
-          size="cta"
-          className="self-start transition-transform hover:-translate-y-0.5"
-        >
-          <Link href={block.href}>{block.label} →</Link>
-        </Button>
-      );
   }
 }
 
@@ -138,11 +139,30 @@ function CaseStudyPanel({ study, first }: { study: CaseStudy; first: boolean }) 
             </Badge>
           ))}
         </div>
+
+        {/*
+          A plain <a>, matching the mailto: and resume anchors — next/link buys
+          nothing for an external URL. `noopener` rather than `noreferrer`:
+          browsers already imply the former on target=_blank, and the latter
+          would strip the referrer from links to Adnan's own products.
+        */}
+        <Button
+          asChild
+          variant="outline"
+          size="cta"
+          className="mt-6 transition-transform hover:-translate-y-0.5"
+        >
+          <a href={study.site.href} target="_blank" rel="noopener">
+            Visit {study.site.domain}
+            <span aria-hidden>↗</span>
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        </Button>
       </div>
 
       <div className="flex min-w-0 flex-col gap-5">
         {study.blocks.map((block, i) => (
-          <Block key={i} block={block} />
+          <Block key={i} block={block} site={study.site} />
         ))}
       </div>
     </div>

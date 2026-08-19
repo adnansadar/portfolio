@@ -23,17 +23,29 @@ export type Metric = {
   featured?: boolean;
 };
 
+/** A screenshot of the shipped product, shown in a fake browser window. */
+export type Shot = {
+  src: string;
+  /** Intrinsic size — drives the frame's aspect ratio so nothing is cropped. */
+  width: number;
+  height: number;
+  alt: string;
+  caption: string;
+};
+
 export type CaseStudyBlock =
   | { kind: "widget"; widget: "watchlist" | "code" }
+  | { kind: "shot"; shot: Shot }
   | { kind: "prose"; eyebrow: string; body: string }
   | { kind: "list"; eyebrow: string; items: string[] }
-  | { kind: "metrics"; items: Metric[] }
-  | { kind: "cta"; label: string; href: string };
+  | { kind: "metrics"; items: Metric[] };
 
 export type CaseStudy = {
   index: string;
   title: string;
   meta: string;
+  /** One source for both the browser title bar and the Visit button. */
+  site: { href: string; domain: string };
   architecture: {
     eyebrow: string;
     rows: ArchRow[];
@@ -48,6 +60,7 @@ export const caseStudies: CaseStudy[] = [
     index: "01",
     title: "Investors Engine",
     meta: "Founding Software Engineer · Feb 2025 – Jul 2026 · Full-stack investment research platform",
+    site: { href: "https://investorsengine.com", domain: "investorsengine.com" },
     architecture: {
       eyebrow: "ARCHITECTURE",
       rows: [
@@ -71,6 +84,19 @@ export const caseStudies: CaseStudy[] = [
       "Docker Compose",
     ],
     blocks: [
+      // The real product first, then the widget built to illustrate how its
+      // live data moves.
+      {
+        kind: "shot",
+        shot: {
+          src: "/shot-investors-engine.png",
+          width: 2552,
+          height: 1342,
+          alt: "The Investors Engine dashboard for NVIDIA, showing financial health and valuation ratios, five-year returns, CAGR tables and an intraday price chart",
+          caption:
+            "Ten years of ratios, valuation and intraday charting, on any of 10,000+ tickers.",
+        },
+      },
       { kind: "widget", widget: "watchlist" },
       {
         kind: "prose",
@@ -102,13 +128,13 @@ export const caseStudies: CaseStudy[] = [
           },
         ],
       },
-      { kind: "cta", label: "Read the full write-up", href: "#work" },
     ],
   },
   {
     index: "02",
     title: "PeopleBlox",
     meta: "Senior Software Engineer, LitmusBlox · Jun 2022 – May 2024 · Competency assessment platform",
+    site: { href: "https://peopleblox.io/", domain: "peopleblox.io" },
     architecture: {
       eyebrow: "FRONTEND ARCHITECTURE",
       rows: [
@@ -124,6 +150,17 @@ export const caseStudies: CaseStudy[] = [
         kind: "prose",
         eyebrow: "LEADING THE FRONTEND",
         body: "Founding frontend engineer on a new product with five developers, a moving spec, and enterprise customers waiting. My job was the architecture, the conventions, and the people.",
+      },
+      {
+        kind: "shot",
+        shot: {
+          src: "/shot-peopleblox.png",
+          width: 2554,
+          height: 1353,
+          alt: "The PeopleBlox product site, headed 'Ten Tools — One unified talent management system', with cards for the competency catalog, discovery survey, competency profile and talent readiness dashboard",
+          caption:
+            "The product site — ten tools spanning the talent-management workflow.",
+        },
       },
       { kind: "widget", widget: "code" },
       {

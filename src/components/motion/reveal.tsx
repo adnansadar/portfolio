@@ -89,8 +89,8 @@ export function Reveal({
   return (
     <Comp
       // Motion serialises the `hidden` styles into the server HTML, which would
-      // leave the page invisible if JS never runs. globals.css has a <noscript>
-      // rule keyed on this attribute that resets them.
+      // leave the page invisible if JS never runs. layout.tsx carries a
+      // <noscript> rule keyed on this attribute that resets them.
       data-reveal={variant}
       {...trigger}
       variants={revealVariants[variant]}

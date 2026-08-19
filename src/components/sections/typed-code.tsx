@@ -9,6 +9,7 @@ import {
   TYPE_HOLD_CHARS,
   TYPE_INTERVAL_MS,
 } from "@/content/code-sample";
+import { WindowChrome } from "@/components/sections/window-chrome";
 import { useIsomorphicLayoutEffect } from "@/lib/use-isomorphic-layout-effect";
 import { sliceTokens, tokenize } from "@/lib/highlight";
 
@@ -51,14 +52,7 @@ export function TypedCode() {
       </div>
 
       <div className="mt-3.5 rounded-[14px] border border-white/[0.12] bg-[#0A0B0E] px-[18px] pt-4 pb-[18px]">
-        <div className="flex items-center gap-2 border-b border-white/[0.07] pb-3">
-          <span aria-hidden className="size-[9px] rounded-full bg-white/[0.22]" />
-          <span aria-hidden className="size-[9px] rounded-full bg-white/[0.14]" />
-          <span aria-hidden className="size-[9px] rounded-full bg-white/10" />
-          <span className="ml-2 font-mono text-[10.5px] tracking-[0.06em] text-ink-700">
-            {CODE_FILENAME}
-          </span>
-        </div>
+        <WindowChrome label={CODE_FILENAME} />
 
         {/*
           min-height holds the panel steady while the text types in, so the
