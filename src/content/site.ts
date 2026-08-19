@@ -15,12 +15,6 @@ export const site = {
     { label: "LinkedIn", href: "https://linkedin.com" },
     { label: "Blog", href: "/blog" },
   ],
-  nav: [
-    { label: "Projects", href: "#work" },
-    { label: "About", href: "#about" },
-    { label: "Blog", href: "#writing" },
-    { label: "Contact", href: "#contact" },
-  ],
 } as const;
 
 export const hero = {

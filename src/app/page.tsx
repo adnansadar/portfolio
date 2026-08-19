@@ -22,14 +22,14 @@ export default function Home() {
         <ProofStrip />
         <CaseStudies />
         <References />
-        <Gallery />
+        <About />
         <SectionRule
           label={writing.rule}
           align="right"
-          className="pt-[clamp(56px,8vh,88px)]"
+          className="pt-[clamp(40px,6vh,64px)]"
         />
         <Writing />
-        <About />
+        <Gallery />
         <Contact />
       </main>
       <SiteFooter />

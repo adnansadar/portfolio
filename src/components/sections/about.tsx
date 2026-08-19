@@ -10,10 +10,10 @@ import { skills } from "@/content/skills";
 export function About() {
   return (
     // tiltIn leans the section in on a 3D axis, so the parent owns the perspective.
-    <section
-      id="about"
-      className="border-t border-white/[0.07] bg-muted [perspective:1600px]"
-    >
+    // No `border-t` here: References is the same `bg-muted` and sits directly
+    // above, so a border would draw a stray hairline through what should read as
+    // one tinted block — what others say, then who I am.
+    <section id="about" className="bg-muted [perspective:1600px]">
       <Reveal
         variant="tiltIn"
         amount={0.1}

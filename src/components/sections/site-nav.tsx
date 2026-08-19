@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
+import { navItems } from "@/content/sections";
 import { site } from "@/content/site";
 import { EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -50,7 +51,7 @@ export function SiteNav({ homeHref = "#top" }: { homeHref?: string }) {
           </Link>
 
           <div className="ml-auto hidden items-center gap-x-[clamp(12px,1.6vw,20px)] sm:flex">
-            {site.nav.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -101,7 +102,7 @@ export function SiteNav({ homeHref = "#top" }: { homeHref?: string }) {
                 className="overflow-hidden"
               >
                 <ul className="mt-2.5 flex flex-col border-t border-white/[0.09] pt-1.5 pr-2">
-                  {site.nav.map((item) => (
+                  {navItems.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
