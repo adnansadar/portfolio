@@ -12,9 +12,17 @@ import {
 import { WindowChrome } from "@/components/sections/window-chrome";
 import { useIsomorphicLayoutEffect } from "@/lib/use-isomorphic-layout-effect";
 import { sliceTokens, tokenize } from "@/lib/highlight";
+import { cn } from "@/lib/utils";
 
 /** Tokenized once at module load — the snippet never changes. */
 const TOKENS = tokenize(CODE_SAMPLE);
+
+/**
+ * Shared by the visible <pre> and the invisible one that sizes it. They must
+ * measure identically, so the typography lives in one place.
+ */
+const PRE =
+  "font-mono text-xs leading-[1.65] break-words whitespace-pre-wrap text-[#D4D4D4]";
 
 /**
  * The looping typewriter in the PeopleBlox case study, in a fake editor chrome.
@@ -55,24 +63,31 @@ export function TypedCode() {
         <WindowChrome label={CODE_FILENAME} />
 
         {/*
-          min-height holds the panel steady while the text types in, so the
-          blocks below it never shift.
+          A hidden copy of the finished snippet reserves the exact height the
+          typed text will end up needing — including however the lines happen to
+          wrap at the current column width — so nothing below shifts while it
+          types. A fixed min-height can't do this: the snippet is ~356px tall on
+          a wide column and considerably taller once it wraps on a phone.
         */}
-        <pre className="mt-3 min-h-[196px] font-mono text-xs leading-[1.65] break-words whitespace-pre-wrap text-[#D4D4D4]">
-          <code>
-            {shown.map((token, i) => (
-              <span key={i} style={{ color: token.color }}>
-                {token.text}
-              </span>
-            ))}
-          </code>
-          {reduced ? null : (
-            <span
-              aria-hidden
-              className="animate-caret ml-px inline-block h-[13px] w-[7px] -translate-y-px bg-foreground align-[-2px]"
-            />
-          )}
-        </pre>
+        <div className="relative mt-3">
+          <pre aria-hidden className={cn(PRE, "invisible")}>{CODE_SAMPLE}</pre>
+
+          <pre className={cn(PRE, "absolute inset-0")}>
+            <code>
+              {shown.map((token, i) => (
+                <span key={i} style={{ color: token.color }}>
+                  {token.text}
+                </span>
+              ))}
+            </code>
+            {reduced ? null : (
+              <span
+                aria-hidden
+                className="animate-caret ml-px inline-block h-[13px] w-[7px] -translate-y-px bg-foreground align-[-2px]"
+              />
+            )}
+          </pre>
+        </div>
       </div>
     </div>
   );
