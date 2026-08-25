@@ -16,9 +16,9 @@ export const sections: readonly Section[] = [
   { id: "contact", nav: "Contact" },
 ];
 
-// Root-relative, not bare hashes: the nav also renders on /blog and
-// /case-studies, where `#work` resolved against the current route and went
-// nowhere. On the homepage these still scroll rather than reload.
+// Root-relative, not bare hashes: the nav also renders on /blog, where `#work`
+// resolved against the current route and went nowhere. On the homepage these
+// still scroll rather than reload.
 //
 // flatMap rather than filter().map() — `filter` does not narrow away the
 // optional `nav`, and this sidesteps a type predicate.

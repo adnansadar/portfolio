@@ -1,11 +1,7 @@
 import { CaseStudyPanel } from "@/components/sections/case-study-panel";
 import { caseStudies, caseStudiesHeading } from "@/content/case-studies";
 
-/**
- * The homepage teaser: each study's screenshot, live widget and numbers. The
- * architecture, the challenge and the decisions behind them live on
- * /case-studies, one link away from every panel.
- */
+/** Each study's screenshot, live widget and numbers, plus a link to the site. */
 export function CaseStudies() {
   return (
     <section id="work" className="shell relative pt-[clamp(72px,10vh,120px)] pb-10">

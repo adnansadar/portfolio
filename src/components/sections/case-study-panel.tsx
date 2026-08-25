@@ -1,14 +1,9 @@
 /*
   Deliberately a Server Component (the `"use client"` this carried when it lived
-  in case-studies.tsx bought nothing — there are no hooks here). It matters on
-  the homepage: as a client component the whole `study` object, narrative blocks
-  included, was serialised into the RSC payload for content the teaser never
-  renders. Interactivity stays in the leaves — Reveal, CountUp, Watchlist,
-  TypedCode — which carry their own directives.
+  in case-studies.tsx bought nothing — there are no hooks here), which also keeps
+  the `study` object out of the RSC payload. Interactivity stays in the leaves —
+  Reveal, CountUp, Watchlist, TypedCode — which carry their own directives.
 */
-import Link from "next/link";
-
-import { ArchitectureDiagram } from "@/components/sections/architecture-diagram";
 import { BrowserFrame } from "@/components/sections/browser-frame";
 import { TypedCode } from "@/components/sections/typed-code";
 import { Watchlist } from "@/components/sections/watchlist";
@@ -17,22 +12,14 @@ import { Reveal } from "@/components/motion/reveal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  SUMMARY_BLOCK_KINDS,
   type CaseStudy,
   type CaseStudyBlock,
   type Metric,
 } from "@/content/case-studies";
 import { cn } from "@/lib/utils";
 
-/**
- * The architecture diagram lives on the study rather than in `blocks`, but it
- * lays out as one — so it joins the flow as a synthetic block on the detail
- * page rather than needing a column of its own.
- */
-type PanelItem = CaseStudyBlock | { kind: "architecture" };
-
 /** Blocks that only read well across the full width of the shell. */
-const FULL_WIDTH = new Set<PanelItem["kind"]>(["shot"]);
+const FULL_WIDTH = new Set<CaseStudyBlock["kind"]>(["shot"]);
 
 /**
  * Which items span both columns.
@@ -40,10 +27,10 @@ const FULL_WIDTH = new Set<PanelItem["kind"]>(["shot"]);
  * Everything but a screenshot is happy at half width, but a lone half in a row
  * leaves a hole beside it — the imbalance this layout exists to fix. So any run
  * of consecutive halves with an odd length gives its last member the full width
- * instead. Today that promotes exactly one thing: the trailing metrics block on
- * /case-studies, which reads as a results bar rather than a gap.
+ * instead. Both studies currently pair their widget with their metrics, so
+ * nothing is promoted; a study that drops either one still lays out flush.
  */
-function spans(items: PanelItem[]): boolean[] {
+function spans(items: CaseStudyBlock[]): boolean[] {
   const full = items.map((item) => FULL_WIDTH.has(item.kind));
 
   for (let i = 0; i < full.length; i++) {
@@ -87,19 +74,12 @@ function MetricCard({ metric }: { metric: Metric }) {
   );
 }
 
-/** The panel chrome shared by the prose, list and architecture blocks. */
-const PANEL =
-  "panel h-full rounded-[18px] border border-white/[0.09] px-[clamp(22px,3vw,32px)] py-[clamp(22px,3vw,30px)]";
-
-/** The little mono label every panel opens with. */
-const EYEBROW = "font-mono text-[11px] tracking-[0.08em] text-ink-400";
-
 function Block({
   item,
   study,
   className,
 }: {
-  item: PanelItem;
+  item: CaseStudyBlock;
   study: CaseStudy;
   className?: string;
 }) {
@@ -120,35 +100,6 @@ function Block({
         </Reveal>
       );
 
-    case "architecture":
-      return (
-        <Reveal className={cn(PANEL, className)}>
-          <ArchitectureDiagram {...study.architecture} />
-        </Reveal>
-      );
-
-    case "prose":
-      return (
-        <Reveal className={cn(PANEL, className)}>
-          <div className={EYEBROW}>{item.eyebrow}</div>
-          <p className="mt-3 text-[clamp(16px,1.2vw,17px)] leading-[1.6] text-ink-100">
-            {item.body}
-          </p>
-        </Reveal>
-      );
-
-    case "list":
-      return (
-        <Reveal className={cn(PANEL, className)}>
-          <div className={EYEBROW}>{item.eyebrow}</div>
-          <ul className="mt-3.5 flex list-disc flex-col gap-3 pl-[18px] text-base leading-[1.6] text-ink-300">
-            {item.items.map((entry) => (
-              <li key={entry}>{entry}</li>
-            ))}
-          </ul>
-        </Reveal>
-      );
-
     case "metrics":
       return (
         // `self-start`, unlike the panels: stretching a pair of stat cards to
@@ -166,47 +117,29 @@ function Block({
           ))}
         </div>
       );
-
   }
 }
 
 /**
- * One case study, in either of two depths.
+ * One case study on the homepage: the screenshot, the live widget and the
+ * numbers.
  *
- * `detail` is the /case-studies page: every block, plus the architecture
- * diagram. Without it this is the homepage teaser — the screenshot, the live
- * widget and the numbers only, with the narrative a click away. Both read from
- * the same `caseStudies` entry, so the two can't drift.
- *
- * The identity — index, title, meta, tags, links — is a full-width band, not a
+ * The identity — index, title, meta, tags, link — is a full-width band, not a
  * side column. A column only balances against body copy of comparable height,
- * which the teaser doesn't have; the band lets the screenshot run the full width
- * of the shell on both routes instead.
+ * which this doesn't have; the band lets the screenshot run the full width of
+ * the shell instead.
  */
 export function CaseStudyPanel({
   study,
   first,
-  detail = false,
 }: {
   study: CaseStudy;
   first: boolean;
-  detail?: boolean;
 }) {
-  const items: PanelItem[] = detail
-    ? [{ kind: "architecture" }, ...study.blocks]
-    : study.blocks.filter((block) => SUMMARY_BLOCK_KINDS.has(block.kind));
-
-  const full = spans(items);
-
-  // The page carries the <h1> and the homepage section an <h2>, so the study
-  // title sits one level below whichever is above it.
-  const Heading = detail ? "h2" : "h3";
+  const full = spans(study.blocks);
 
   return (
     <div
-      // Only an anchor target on the page it is linked to; the homepage would
-      // otherwise duplicate the id in the document.
-      id={detail ? study.slug : undefined}
       className={cn(
         first ? "pt-[clamp(44px,7vh,72px)]" : "pt-[clamp(72px,12vh,120px)]"
       )}
@@ -216,9 +149,10 @@ export function CaseStudyPanel({
           <div className="font-mono text-xs tracking-[0.08em]">
             {study.index} / CASE STUDY
           </div>
-          <Heading className="mt-4 text-[clamp(27px,3vw,44px)] leading-[1.02] font-black tracking-[-0.03em]">
+          {/* The section above carries the <h2>. */}
+          <h3 className="mt-4 text-[clamp(27px,3vw,44px)] leading-[1.02] font-black tracking-[-0.03em]">
             {study.title}
-          </Heading>
+          </h3>
           <p className="mt-3 max-w-[62ch] text-[15px] text-ink-400">
             {study.meta}
           </p>
@@ -243,16 +177,6 @@ export function CaseStudyPanel({
               <span className="sr-only">(opens in a new tab)</span>
             </a>
           </Button>
-
-          {detail ? null : (
-            <Link
-              href={`/case-studies#${study.slug}`}
-              className="text-sm font-medium text-ink-300 underline-offset-4 transition-colors hover:text-white hover:underline"
-            >
-              Read the full case study
-              <span aria-hidden> →</span>
-            </Link>
-          )}
         </div>
       </div>
 
@@ -275,7 +199,7 @@ export function CaseStudyPanel({
         and for assessments.ts to hold its longest line unwrapped.
       */}
       <div className="mt-[clamp(26px,3.5vw,40px)] grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))]">
-        {items.map((item, i) => (
+        {study.blocks.map((item, i) => (
           <Block
             key={i}
             item={item}
