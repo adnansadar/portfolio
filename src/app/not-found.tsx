@@ -1,11 +1,12 @@
 import Link from "next/link";
 
+import { PageShell } from "@/components/sections/page-shell";
 import { SiteNav } from "@/components/sections/site-nav";
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <>
+    <PageShell>
       <SiteNav homeHref="/" />
       <main className="shell flex flex-1 flex-col items-start justify-center gap-6 py-[clamp(160px,30vh,280px)]">
         <div className="font-mono text-xs tracking-[0.09em] text-ink-700">
@@ -18,6 +19,6 @@ export default function NotFound() {
           <Link href="/">← Back to work</Link>
         </Button>
       </main>
-    </>
+    </PageShell>
   );
 }

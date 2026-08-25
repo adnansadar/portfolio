@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Stagger } from "@/components/motion/stagger";
-import type { Article } from "@/content/articles";
+import { articleHref, type ArticleRow } from "@/content/articles";
 import { cn } from "@/lib/utils";
 
 const ROW =
@@ -12,13 +12,17 @@ const ROW =
 
 /**
  * Shared between the homepage teaser and /blog so the two lists can never drift.
- * Articles with no `href` render as plain rows rather than dead links.
+ * Unwritten articles render as plain rows rather than dead links.
+ *
+ * Takes `ArticleRow`, not `Article`: this is a client component, so whatever it
+ * is handed ends up in the bundle of both pages that use it — and neither one
+ * renders a word of the post bodies.
  */
 export function ArticleRows({
   articles,
   className,
 }: {
-  articles: Article[];
+  articles: ArticleRow[];
   className?: string;
 }) {
   return (
@@ -27,6 +31,8 @@ export function ArticleRows({
       className={cn("flex flex-col border-t border-white/[0.08]", className)}
     >
       {articles.map((article) => {
+        const href = articleHref(article);
+
         const body = (
           <>
             <span className="w-[92px] shrink-0 font-mono text-xs text-ink-700">
@@ -36,16 +42,16 @@ export function ArticleRows({
               {article.title}
             </span>
             <span className="shrink-0 text-[13.5px] text-ink-400">
-              {article.href ? article.tags : `${article.tags} · Coming soon`}
+              {href ? article.tags : `${article.tags} · Coming soon`}
             </span>
           </>
         );
 
         return (
           <Reveal key={article.title} variant="rvlL">
-            {article.href ? (
+            {href ? (
               <Link
-                href={article.href}
+                href={href}
                 className={cn(ROW, "transition-colors hover:bg-white/[0.04]")}
               >
                 {body}

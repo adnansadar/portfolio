@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArticleRows } from "@/components/sections/article-rows";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
-import { articles, writing } from "@/content/articles";
+import { articleRows, writing } from "@/content/articles";
 
 export function Writing() {
   return (
@@ -39,7 +39,7 @@ export function Writing() {
         </Button>
       </div>
 
-      <ArticleRows articles={articles} className="mt-11" />
+      <ArticleRows articles={articleRows} className="mt-11" />
     </Reveal>
   );
 }
