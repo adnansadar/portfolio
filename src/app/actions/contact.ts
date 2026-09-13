@@ -38,7 +38,7 @@ export async function sendContactMessage(
     return {
       ok: false,
       reason: "unconfigured",
-      message: "Email isn't wired up yet — reach me directly instead.",
+      message: "Email isn't wired up yet, so reach me directly instead.",
     };
   }
 

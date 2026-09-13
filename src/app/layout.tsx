@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.role}`,
+    default: `${site.name} · ${site.role}`,
     template: `%s · ${site.name}`,
   },
   description:
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} · ${site.role}`,
     description:
       "Scalable frontend architecture, real-time data interfaces, and design systems. Five years shipping product, two leading the frontend.",
     // Image comes from app/opengraph-image.tsx, which Next wires up for both
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} · ${site.role}`,
     description:
       "Scalable frontend architecture, real-time data interfaces, and design systems.",
   },

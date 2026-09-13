@@ -47,7 +47,7 @@ export function Watchlist() {
   return (
     <div className="panel rounded-[18px] border border-white/10 p-[clamp(18px,2.4vw,24px)]">
       <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-white/[0.08] pb-3">
-        <div className="text-[15px] font-bold">Watchlist — live</div>
+        <div className="text-[15px] font-bold">Watchlist · live</div>
       </div>
 
       <ul className="list-none">

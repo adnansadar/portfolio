@@ -25,10 +25,7 @@ export default function BlogPage() {
         <div className={ARTICLE_COLUMN}>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <div className="font-mono text-xs tracking-[0.08em] text-ink-400">
-                {writing.eyebrow}
-              </div>
-              <h1 className="mt-3.5 text-[clamp(32px,4vw,56px)] font-black tracking-[-0.035em]">
+              <h1 className="text-[clamp(32px,4vw,56px)] font-black tracking-[-0.035em]">
                 {writing.title}
               </h1>
               <p className="mt-3 max-w-[52ch] text-base leading-[1.6] text-ink-400">

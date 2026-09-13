@@ -18,6 +18,6 @@ export const skills: SkillCard[] = [
   },
   {
     label: "EDUCATION",
-    body: "MS Computer Science — SUNY Buffalo, 2025 · BTech IT — VIT Pune, 8.45 CGPA",
+    body: "MS Computer Science, SUNY Buffalo, 2025 · BTech IT, VIT Pune, 8.45 CGPA",
   },
 ];

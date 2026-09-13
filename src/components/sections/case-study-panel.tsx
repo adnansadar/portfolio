@@ -124,7 +124,7 @@ function Block({
  * One case study on the homepage: the screenshot, the live widget and the
  * numbers.
  *
- * The identity — index, title, meta, tags, link — is a full-width band, not a
+ * The identity — title, meta, tags, link — is a full-width band, not a
  * side column. A column only balances against body copy of comparable height,
  * which this doesn't have; the band lets the screenshot run the full width of
  * the shell instead.
@@ -146,11 +146,8 @@ export function CaseStudyPanel({
     >
       <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
         <div className="min-w-0">
-          <div className="font-mono text-xs tracking-[0.08em]">
-            {study.index} / CASE STUDY
-          </div>
           {/* The section above carries the <h2>. */}
-          <h3 className="mt-4 text-[clamp(27px,3vw,44px)] leading-[1.02] font-black tracking-[-0.03em]">
+          <h3 className="text-[clamp(27px,3vw,44px)] leading-[1.02] font-black tracking-[-0.03em]">
             {study.title}
           </h3>
           <p className="mt-3 max-w-[62ch] text-[15px] text-ink-400">

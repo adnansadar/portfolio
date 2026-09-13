@@ -18,10 +18,7 @@ export function Writing() {
     >
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
-          <div className="font-mono text-xs tracking-[0.08em] text-ink-400">
-            {writing.eyebrow}
-          </div>
-          <h2 className="mt-3.5 text-[clamp(26px,3vw,44px)] font-black tracking-[-0.03em]">
+          <h2 className="text-[clamp(26px,3vw,44px)] font-black tracking-[-0.03em]">
             {writing.title}
           </h2>
           <p className="mt-3 max-w-[52ch] text-base leading-[1.6] text-ink-400">

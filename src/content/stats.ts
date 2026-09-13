@@ -29,5 +29,3 @@ export const stats: Stat[] = [
     label: "Delivery-workflow efficiency gain across teams",
   },
 ];
-
-export const statsRule = "01 — WHAT THE NUMBERS SAY";

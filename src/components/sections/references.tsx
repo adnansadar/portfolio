@@ -58,14 +58,9 @@ export function References() {
       className="border-t border-white/[0.07] bg-muted"
     >
       <div className="shell py-[clamp(64px,9vh,100px)]">
-        <div className="flex flex-wrap items-baseline justify-between gap-4">
-          <h2 className="text-[clamp(24px,2.6vw,38px)] font-black tracking-[-0.03em]">
-            {referencesHeading.title}
-          </h2>
-          <span className="font-mono text-[11.5px] text-ink-700">
-            {referencesHeading.meta}
-          </span>
-        </div>
+        <h2 className="text-[clamp(24px,2.6vw,38px)] font-black tracking-[-0.03em]">
+          {referencesHeading.title}
+        </h2>
 
         {perCard ? (
           <div className={GRID}>{cards}</div>

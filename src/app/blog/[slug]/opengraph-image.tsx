@@ -23,7 +23,7 @@ export function generateImageMetadata({
       id: "card",
       size,
       contentType,
-      alt: article ? `${article.title} — ${site.name}` : site.name,
+      alt: article ? `${article.title} · ${site.name}` : site.name,
     },
   ];
 }

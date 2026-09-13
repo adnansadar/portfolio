@@ -65,7 +65,7 @@ export function Hero() {
             size="xl"
             className="font-semibold transition-transform hover:-translate-y-0.5"
           >
-            <Link href="#work">Read the case studies →</Link>
+            <Link href="#work">See the projects →</Link>
           </Button>
         </Reveal>
 

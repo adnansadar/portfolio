@@ -49,8 +49,9 @@ const CODE =
 
 const LIST = "mt-6 flex flex-col gap-2.5";
 
-/* A hanging em dash instead of a disc: the site already punctuates with · and
-   — everywhere, and Tailwind's preflight has stripped list markers anyway. */
+/* A hanging dash instead of a disc. Purely a list marker: the prose itself
+   carries no em dashes, and Tailwind's preflight has stripped list markers
+   anyway, so this glyph is the bullet, not punctuation. */
 const LIST_ITEM =
   "relative pl-[26px] text-[clamp(16.5px,1.25vw,18px)] leading-[1.7] text-ink-200 before:absolute before:left-0 before:text-ink-700 before:content-['—']";
 

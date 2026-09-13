@@ -89,7 +89,7 @@ export const articles: Article[] = [
       src: "/post-css-agent-cover.webp",
       width: 931,
       height: 489,
-      alt: "A terminal listing four /css-architecture-fixer commands — analyze, fix, migrate-to-modules and namespace — each under a comment describing what it does.",
+      alt: "A terminal listing four /css-architecture-fixer commands (analyze, fix, migrate-to-modules and namespace), each under a comment describing what it does.",
     },
     body: [
       { kind: "h2", text: "The Problem: CSS That Works... Until It Doesn't" },
@@ -152,7 +152,7 @@ export const articles: Article[] = [
           height: 1325,
           alt: "The agent's markdown definition, listing its purpose against global class name collisions and Bootstrap overrides, then four numbered capabilities: CSS conflict audit, namespace generation, CSS Modules migration, and validation and reporting.",
           caption:
-            "The agent definition — purpose, then one section per phase of the job.",
+            "The agent definition: purpose, then one section per phase of the job.",
         },
       },
       {
@@ -281,7 +281,7 @@ export const articles: Article[] = [
       "Perplexity",
     ],
     blurb:
-      "I asked Perplexity's Comet assistant to turn a page of rough course notes into a structured Google Doc. It navigated the UI and did it in three minutes — then hit a wall at the file picker.",
+      "I asked Perplexity's Comet assistant to turn a page of rough course notes into a structured Google Doc. It navigated the UI and did it in three minutes, then hit a wall at the file picker.",
     origin: {
       label: "Peerlist",
       href: "https://peerlist.io/adnansadar/articles/first-impressions-with-comet-browser-for-real-world-workflow",
@@ -330,7 +330,7 @@ export const articles: Article[] = [
           height: 1225,
           alt: "A Google Doc titled 'Artifacts in the UX Process: Systematic Overview' holding the notes as a numbered outline, with bracketed [IMAGE: ...] placeholders where the screenshots should sit.",
           caption:
-            "The document Comet created and filled in — with [IMAGE: Tilly Persona - image.jpg] standing in for the screenshots it could not attach.",
+            "The document Comet created and filled in, with [IMAGE: Tilly Persona - image.jpg] standing in for the screenshots it could not attach.",
         },
       },
       { kind: "h2", text: "The Limitation" },
@@ -374,7 +374,7 @@ export const articles: Article[] = [
       "Graduate school",
     ],
     blurb:
-      "Layoffs at work, nine months of GRE prep after hours, five applications reduced to a spreadsheet, and a visa interview that lasted five minutes — how I ended up moving from Pune to Buffalo.",
+      "Layoffs at work, nine months of GRE prep after hours, five applications reduced to a spreadsheet, and a visa interview that lasted five minutes. How I ended up moving from Pune to Buffalo.",
     body: [
       {
         kind: "p",
@@ -750,8 +750,6 @@ export const articleRows: ArticleRow[] = articles.map(
 );
 
 export const writing = {
-  eyebrow: "/ BLOG",
-  rule: "02 — WRITTEN WORK",
   title: "Latest writing",
   blurb:
     "Notes on frontend architecture, AI-assisted workflows, and the tools I put through real work.",

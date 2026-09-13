@@ -10,7 +10,7 @@ import { PageShell } from "@/components/sections/page-shell";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { SiteNav } from "@/components/sections/site-nav";
 import { Button } from "@/components/ui/button";
-import { articles, findArticle, writing } from "@/content/articles";
+import { articles, findArticle } from "@/content/articles";
 
 /** In Next 16 the route's params arrive as a promise and have to be awaited. */
 type Props = { params: Promise<{ slug: string }> };
@@ -115,12 +115,9 @@ export default async function ArticlePage({ params }: Props) {
           </div>
 
           <header className="mt-[clamp(28px,4vh,44px)]">
-            <div className="font-mono text-xs tracking-[0.08em] text-ink-400">
-              {writing.eyebrow}
-            </div>
             {/* Capped at 26ch so a headline still breaks over two or three
                 lines rather than running the full 1200px as one. */}
-            <h1 className="mt-3.5 max-w-[26ch] text-[clamp(32px,4vw,56px)] leading-[1.05] font-black tracking-[-0.035em]">
+            <h1 className="max-w-[26ch] text-[clamp(32px,4vw,56px)] leading-[1.05] font-black tracking-[-0.035em]">
               {article.title}
             </h1>
             <p className="mt-4 text-base leading-[1.6] text-ink-400">

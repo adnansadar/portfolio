@@ -39,7 +39,7 @@ export function ContactForm() {
       setSent(true);
       setFallback(false);
       reset();
-      toast.success("Message sent — I'll be in touch.");
+      toast.success("Message sent. I'll be in touch.");
       return;
     }
 
@@ -123,7 +123,7 @@ export function ContactForm() {
 
       {fallback ? (
         <p className="text-[12.5px] text-ink-400">
-          Email isn&apos;t configured on this deploy — reach me at{" "}
+          Email isn&apos;t configured on this deploy, so reach me at{" "}
           <a
             href={`mailto:${site.email}`}
             className="text-foreground underline underline-offset-4"

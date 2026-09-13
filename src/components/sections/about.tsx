@@ -20,10 +20,7 @@ export function About() {
         className="shell grid gap-[clamp(36px,5vw,72px)] py-[clamp(72px,10vh,110px)] [grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr))]"
       >
         <div className="min-w-0">
-          <div className="font-mono text-xs tracking-[0.08em] text-ink-400">
-            {about.eyebrow}
-          </div>
-          <h2 className="mt-3.5 max-w-[26ch] text-[clamp(24px,2.6vw,38px)] leading-[1.14] font-black tracking-[-0.03em]">
+          <h2 className="max-w-[26ch] text-[clamp(24px,2.6vw,38px)] leading-[1.14] font-black tracking-[-0.03em]">
             {about.heading}
           </h2>
           <p className="mt-[22px] max-w-[58ch] text-[clamp(16px,1.2vw,17px)] leading-[1.65] text-ink-300">

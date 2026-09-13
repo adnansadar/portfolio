@@ -87,9 +87,8 @@ export function Gallery() {
       className="relative overflow-hidden py-[clamp(56px,8vh,88px)]"
       aria-label="Photos from Buffalo, Niagara and in between"
     >
-      <div className="shell flex flex-wrap items-baseline justify-between gap-3 pb-6 font-mono text-[11.5px] tracking-[0.09em] text-ink-700">
-        <span>{galleryEyebrow}</span>
-        <span>{gallery.length} PHOTOS</span>
+      <div className="shell pb-6 font-mono text-[11.5px] tracking-[0.09em] text-ink-700">
+        {galleryEyebrow}
       </div>
 
       <div

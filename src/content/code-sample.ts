@@ -16,7 +16,7 @@ export const CODE_SAMPLE = `export const assessmentsApi = createApi({
     }),
   }),
 });
-// Redux holds UI state only — server state lives here.`;
+// Redux holds UI state only. Server state lives here.`;
 
 /** One character every 24ms, then a short hold before the loop restarts. */
 export const TYPE_INTERVAL_MS = 24;

@@ -40,7 +40,7 @@ export const gallery: Slide[] = [
     height: 4080,
     alt: "Hayes Hall at the University at Buffalo South Campus",
     title: "UB South Campus",
-    caption: "Hayes Hall — University at Buffalo.",
+    caption: "Hayes Hall, University at Buffalo.",
   },
   {
     src: "/gallery-04.jpg",
@@ -56,7 +56,7 @@ export const gallery: Slide[] = [
     height: 3072,
     alt: "Adnan at the University at Buffalo commencement ceremony",
     title: "UB commencement",
-    caption: "MS Computer Science, University at Buffalo — December 2025.",
+    caption: "MS Computer Science, University at Buffalo, December 2025.",
   },
   {
     src: "/gallery-06.png",
@@ -72,7 +72,7 @@ export const gallery: Slide[] = [
     height: 4080,
     alt: "Adnan at Eternal Flame Falls, a natural gas flame burning in a grotto behind the falling water",
     title: "Eternal Flame Falls",
-    caption: "Buffalo, NY — the flame still going behind the water.",
+    caption: "Buffalo, NY. The flame still going behind the water.",
   },
   {
     src: "/gallery-08.jpg",
@@ -100,7 +100,7 @@ export const gallery: Slide[] = [
   },
 ];
 
-export const galleryEyebrow = "OFF THE CLOCK — BUFFALO, NIAGARA & IN BETWEEN";
+export const galleryEyebrow = "OFF THE CLOCK · BUFFALO, NIAGARA & IN BETWEEN";
 
 /** One full pass of the strip. Slow enough to read as drift, not motion. */
 export const MARQUEE_SECONDS = 80;

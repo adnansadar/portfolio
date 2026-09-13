@@ -29,7 +29,6 @@ export type CaseStudyBlock =
   | { kind: "metrics"; items: Metric[] };
 
 export type CaseStudy = {
-  index: string;
   title: string;
   meta: string;
   /** One source for both the browser title bar and the Visit button. */
@@ -40,10 +39,12 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    index: "01",
     title: "Investors Engine",
-    meta: "Founding Software Engineer · Feb 2025 – Jul 2026 · Full-stack investment research platform",
-    site: { href: "https://investorsengine.com", domain: "investorsengine.com" },
+    meta: "Lead Frontend Engineer · Feb 2025 – Jul 2026 · Full-stack investment research platform",
+    site: {
+      href: "https://investorsengine.com",
+      domain: "investorsengine.com",
+    },
     tags: [
       "Next.js",
       "TypeScript",
@@ -85,7 +86,6 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    index: "02",
     title: "PeopleBlox",
     meta: "Senior Software Engineer, LitmusBlox · Jun 2022 – May 2024 · Competency assessment platform",
     site: { href: "https://peopleblox.io/", domain: "peopleblox.io" },
@@ -97,9 +97,9 @@ export const caseStudies: CaseStudy[] = [
           src: "/shot-peopleblox.png",
           width: 2554,
           height: 1353,
-          alt: "The PeopleBlox product site, headed 'Ten Tools — One unified talent management system', with cards for the competency catalog, discovery survey, competency profile and talent readiness dashboard",
+          alt: "The PeopleBlox product site, headed 'Ten Tools' above 'One unified talent management system', with cards for the competency catalog, discovery survey, competency profile and talent readiness dashboard",
           caption:
-            "The product site — ten tools spanning the talent-management workflow.",
+            "The product site: ten tools spanning the talent-management workflow.",
         },
       },
       { kind: "widget", widget: "code" },
@@ -126,6 +126,5 @@ export const caseStudies: CaseStudy[] = [
 
 /** The homepage section header. */
 export const caseStudiesHeading = {
-  title: "Deep-dive case studies",
-  meta: "SYSTEM DESIGN · ARCHITECTURE · OUTCOMES",
+  title: "Projects",
 } as const;
