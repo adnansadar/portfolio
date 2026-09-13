@@ -194,24 +194,30 @@ function Block({ block }: { block: ArticleBlock }) {
  * Only the images are revealed on scroll. Wrapping every paragraph would make
  * a page built for reading fight the reader on the way down, and the prose has
  * no entrance to earn — it's the thing you came for.
+ *
+ * `cover` is optional: a piece with nothing to show opens straight into its
+ * first paragraph rather than onto a placeholder. The body's top margin is the
+ * cover's, so without one the header's own spacing is the only gap.
  */
 export function ArticleBody({
   cover,
   blocks,
   className,
 }: {
-  cover: Figure;
+  cover?: Figure;
   blocks: ArticleBlock[];
   className?: string;
 }) {
   return (
     <div className={cn(ARTICLE_COLUMN, className)}>
       {/* Above the fold on every post, so it opts out of lazy loading. */}
-      <Reveal>
-        <Frame figure={cover} priority />
-      </Reveal>
+      {cover ? (
+        <Reveal>
+          <Frame figure={cover} priority />
+        </Reveal>
+      ) : null}
 
-      <div className="mt-[clamp(36px,5vw,56px)]">
+      <div className={cover ? "mt-[clamp(36px,5vw,56px)]" : undefined}>
         {blocks.map((block, i) => (
           <Block key={i} block={block} />
         ))}
