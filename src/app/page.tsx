@@ -1,6 +1,7 @@
 import { About } from "@/components/sections/about";
 import { CaseStudies } from "@/components/sections/case-studies";
 import { Contact } from "@/components/sections/contact";
+import { Designs } from "@/components/sections/designs";
 import { Gallery } from "@/components/sections/gallery";
 import { Hero } from "@/components/sections/hero";
 import { PageShell } from "@/components/sections/page-shell";
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <ProofStrip />
         <CaseStudies />
+        <Designs />
         <Writing />
         <About />
         <References />

@@ -10,6 +10,7 @@ type Section = { readonly id: string; readonly nav?: string };
 export const sections: readonly Section[] = [
   { id: "top" },
   { id: "work", nav: "Projects" },
+  { id: "designs", nav: "Designs" },
   { id: "writing", nav: "Blog" },
   { id: "about", nav: "About" },
   { id: "contact", nav: "Contact" },
