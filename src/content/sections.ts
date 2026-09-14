@@ -1,7 +1,6 @@
 /**
- * The page's section order, declared once. `page.tsx` renders in this order and
- * the nav is derived from it, so the two cannot drift apart — which is how the
- * nav came to list About before Blog while the page rendered the reverse.
+ * The page's anchored section order, mirrored by `page.tsx`. The nav is derived
+ * from it so its links stay in the same order as the corresponding page sections.
  *
  * A section without `nav` is rendered but not linked (the hero, and the
  * unanchored ProofStrip / References / Gallery bands).
@@ -11,8 +10,8 @@ type Section = { readonly id: string; readonly nav?: string };
 export const sections: readonly Section[] = [
   { id: "top" },
   { id: "work", nav: "Projects" },
-  { id: "about", nav: "About" },
   { id: "writing", nav: "Blog" },
+  { id: "about", nav: "About" },
   { id: "contact", nav: "Contact" },
 ];
 

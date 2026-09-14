@@ -18,9 +18,9 @@ export default function Home() {
         <Hero />
         <ProofStrip />
         <CaseStudies />
-        <References />
-        <About />
         <Writing />
+        <About />
+        <References />
         <Gallery />
         <Contact />
       </main>
