@@ -50,8 +50,9 @@ export function CountUp({
   }, [inView, reduced, value]);
 
   return (
-    <span ref={ref} className={className}>
-      {format(value)}
+    <span className={className}>
+      <span className="sr-only">{format(value)}</span>
+      <span ref={ref} aria-hidden="true">{format(value)}</span>
     </span>
   );
 }

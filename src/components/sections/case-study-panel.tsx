@@ -140,6 +140,7 @@ export function CaseStudyPanel({
 
   return (
     <div
+      id={study.slug}
       className={cn(
         first ? "pt-[clamp(44px,7vh,72px)]" : "pt-[clamp(72px,12vh,120px)]"
       )}
@@ -153,6 +154,7 @@ export function CaseStudyPanel({
           <p className="mt-3 max-w-[62ch] text-[15px] text-ink-400">
             {study.meta}
           </p>
+          <p className="mt-4 max-w-[72ch] text-base leading-relaxed text-ink-300">{study.summary}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3">

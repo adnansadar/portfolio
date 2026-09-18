@@ -29,6 +29,8 @@ export type CaseStudyBlock =
   | { kind: "metrics"; items: Metric[] };
 
 export type CaseStudy = {
+  slug: string;
+  summary: string;
   title: string;
   meta: string;
   /** One source for both the browser title bar and the Visit button. */
@@ -40,6 +42,8 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     title: "Investors Engine",
+    slug: "investors-engine",
+    summary: "I built this full-stack investment research platform end to end, with a Next.js and TypeScript frontend, real-time data interfaces, and a stack including WebSockets, Redis and Docker Compose. It brings historical ratios and charts for over 10,000 tickers into one product, with a Google Sheets extension for working with financial data.",
     meta: "Lead Frontend Engineer · Feb 2025 – Jul 2026 · Full-stack investment research platform",
     site: {
       href: "https://investorsengine.com",
@@ -87,6 +91,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     title: "PeopleBlox",
+    slug: "peopleblox",
+    summary: "At LitmusBlox, I helped build PeopleBlox, a competency assessment platform, using React, Next.js and TypeScript. I established frontend conventions and tooling, led a team of five, and used Redux and RTK Query for data management, reducing API calls for cached data by 30%.",
     meta: "Senior Software Engineer, LitmusBlox · Jun 2022 – May 2024 · Competency assessment platform",
     site: { href: "https://peopleblox.io/", domain: "peopleblox.io" },
     tags: ["Next.js", "React", "TypeScript", "Redux", "RTK Query", "Cypress"],

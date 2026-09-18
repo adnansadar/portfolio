@@ -14,6 +14,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
+  authors: [{ name: site.name, url: `${site.url}/#about` }],
+  creator: site.name,
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   title: {
     default: `${site.name} · ${site.role}`,
     template: `%s · ${site.name}`,

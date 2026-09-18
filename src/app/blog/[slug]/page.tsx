@@ -11,6 +11,9 @@ import { SiteFooter } from "@/components/sections/site-footer";
 import { SiteNav } from "@/components/sections/site-nav";
 import { Button } from "@/components/ui/button";
 import { articles, findArticle } from "@/content/articles";
+import { site } from "@/content/site";
+import { StructuredData } from "@/components/structured-data";
+import { absoluteUrl, breadcrumbs, headingId, personId } from "@/lib/seo";
 
 /** In Next 16 the route's params arrive as a promise and have to be awaited. */
 type Props = { params: Promise<{ slug: string }> };
@@ -39,12 +42,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: article.blurb,
     keywords: article.keywords,
     /*
-      Self-canonical, deliberately — even for a post that ran elsewhere first.
-      Pointing this at the original would tell Google to index that copy and
-      drop this one, which is the opposite of why the post is hosted here.
-      Attribution is the visible credit in the header instead.
-
-      Relative paths resolve against the metadataBase set in layout.tsx.
+      Self-canonical expresses the preferred portfolio URL. Search engines
+      may still choose the syndicated original; attribution is not a
+      substitute for cross-domain canonical coordination with the publisher.
+      Relative paths resolve against metadataBase in layout.tsx.
     */
     alternates: { canonical: url },
     openGraph: {
@@ -53,10 +54,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: article.title,
       description: article.blurb,
       publishedTime: article.published,
+      modifiedTime: article.modified,
+      authors: [absoluteUrl("/#about")],
       tags: article.keywords,
-      // No `images`: app/opengraph-image.tsx is inherited by nested segments,
-      // so the post already gets the branded 1200×630 card. The cover is the
-      // wrong shape for one and would crop badly.
+      // The route's opengraph-image.tsx supplies the article-specific card.
     },
     twitter: {
       card: "summary_large_image",
@@ -76,6 +77,17 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <PageShell>
+      <StructuredData data={{ "@graph": [
+        { "@type": "BlogPosting", "@id": absoluteUrl(`/blog/${slug}#article`),
+          headline: article.title, description: article.blurb, url: absoluteUrl(`/blog/${slug}`),
+          mainEntityOfPage: absoluteUrl(`/blog/${slug}`), datePublished: article.published,
+          ...(article.modified ? { dateModified: article.modified } : {}),
+          author: { "@type": "Person", "@id": personId, name: site.name, url: absoluteUrl("/#about") },
+          image: absoluteUrl(article.cover?.src ?? "/opengraph-image"), inLanguage: "en",
+          keywords: article.keywords, ...(article.origin ? { isBasedOn: article.origin.href } : {}),
+        },
+        breadcrumbs([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }, { name: article.title, path: `/blog/${slug}` }]),
+      ] }} />
       <SiteNav homeHref="/" />
       {/*
         Two things worth knowing about this element:
@@ -95,7 +107,7 @@ export default async function ArticlePage({ params }: Props) {
         `scroll-padding-top` in globals.css, which already assumes a nav height.
       */}
       <main className="shell relative w-full flex-1 pt-[calc(clamp(10px,2vw,18px)+58px+12px)] pb-[clamp(72px,10vh,120px)] sm:pt-[calc(clamp(10px,2vw,18px)+44.5px+12px)]">
-        <div className={ARTICLE_COLUMN}>
+        <article className={ARTICLE_COLUMN}>
           {/*
             Above the title rather than beside it. The /blog listing pairs the
             button with a two-line header, but a post header runs to four
@@ -125,7 +137,10 @@ export default async function ArticlePage({ params }: Props) {
             </p>
 
             <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs tracking-[0.06em] text-ink-700">
+              <Link href="/#about" rel="author" className="text-ink-400 underline underline-offset-4">By {site.name}</Link>
+              <span aria-hidden>·</span>
               <time dateTime={article.published}>{article.date}</time>
+              {article.modified ? <span>Updated <time dateTime={article.modified}>{article.modified}</time></span> : null}
               <span aria-hidden>·</span>
               <span>{article.tags}</span>
               {article.origin ? (
@@ -148,12 +163,34 @@ export default async function ArticlePage({ params }: Props) {
             </div>
           </header>
 
+          {article.body.some((block) => block.kind === "h2") ? (
+            <nav aria-label="On this page" className="mt-8 rounded-xl border border-white/10 p-5">
+              <p className="font-semibold">On this page</p>
+              <ul className="mt-3 space-y-2 text-sm text-ink-300">
+                {article.body.map((block, index) => block.kind === "h2" ? (
+                  <li key={index}><a className="underline underline-offset-4 hover:text-white" href={`#${headingId(block.text, index)}`}>{block.text}</a></li>
+                ) : null)}
+              </ul>
+            </nav>
+          ) : null}
+
           <ArticleBody
             cover={article.cover}
             blocks={article.body}
             className="mt-[clamp(40px,6vh,64px)]"
           />
-        </div>
+          <aside className="mt-14 border-t border-white/10 pt-6" aria-label="About the author">
+            <h2 className="text-xl font-bold">About {site.name}</h2>
+            <p className="mt-3 text-ink-300">Frontend and full-stack engineer working with React, Next.js and TypeScript. I write about frontend architecture, AI-assisted workflows, and tools I use in practice.</p>
+            <Link href="/#work" className="mt-3 inline-block underline underline-offset-4">Explore my engineering projects</Link>
+          </aside>
+          <nav aria-label="More articles" className="mt-10">
+            <h2 className="text-xl font-bold">More writing</h2>
+            <ul className="mt-4 space-y-3">{articles.filter((item) => item.slug && item.slug !== slug).map((item) => (
+              <li key={item.slug}><Link className="text-ink-300 underline underline-offset-4 hover:text-white" href={`/blog/${item.slug}`}>{item.title}</Link></li>
+            ))}</ul>
+          </nav>
+        </article>
       </main>
       <SiteFooter />
     </PageShell>

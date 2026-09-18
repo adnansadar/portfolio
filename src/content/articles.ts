@@ -48,6 +48,8 @@ export type Article = {
   date: string;
   /** ISO, for <time datetime> and og:article:published_time. */
   published: string;
+  /** Set only after a substantive editorial update; never use the build date. */
+  modified?: string;
   title: string;
   /** The row's trailing meta line. */
   tags: string;
@@ -80,7 +82,7 @@ export const articles: Article[] = [
       "Bootstrap",
       "NextJS",
     ],
-    blurb: "Turning a weekend debugging session into an automated solution",
+    blurb: "How I used a Claude Code subagent to diagnose global CSS collisions in Next.js, namespace selectors, and migrate styles to CSS Modules.",
     origin: {
       label: "Peerlist",
       href: "https://peerlist.io/adnansadar/articles/how-i-built-a-claude-code-agent-to-fix-css-architecture-nigh",

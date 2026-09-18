@@ -12,7 +12,7 @@ export const site = {
   },
   socials: [
     { label: "GitHub", href: "https://github.com/adnansadar" },
-    { label: "LinkedIn", href: "https://linkedin.com" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/adnansadar/" },
     { label: "Blog", href: "/blog" },
   ],
 } as const;
@@ -24,9 +24,9 @@ export const hero = {
     trail: "Technical Writer.",
   },
   blurb:
-    "I build scalable frontend architectures: clean React / Next.js ecosystems, real-time data interfaces, and design systems that hold up as teams grow. Five years shipping product, two of them leading the frontend.",
+    "I build frontend and full-stack products with React, Next.js and TypeScript: real-time data interfaces, maintainable design systems, and platforms shipped end to end. Five years shipping product, two of them leading the frontend.",
   image: {
-    src: "/hero.jpeg",
+    src: "/hero.webp",
     alt: "Portrait of Adnan Sadar",
   },
 } as const;
@@ -38,7 +38,7 @@ export const about = {
 } as const;
 
 export const contact = {
-  heading: "Hiring for a Lead Frontend role?",
+  heading: "Hiring for a frontend or full-stack role?",
   blurb:
     "Two pages, no fluff: architecture decisions, team leadership, shipped outcomes.",
   formNote: "Typically replies within a day · Pune, IST",

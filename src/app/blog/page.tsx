@@ -8,15 +8,19 @@ import { SiteFooter } from "@/components/sections/site-footer";
 import { SiteNav } from "@/components/sections/site-nav";
 import { Button } from "@/components/ui/button";
 import { articleRows, writing } from "@/content/articles";
+import { pageMetadata, absoluteUrl, breadcrumbs, personId } from "@/lib/seo";
+import { StructuredData } from "@/components/structured-data";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description: writing.blurb,
-};
+export const metadata: Metadata = pageMetadata("Frontend Engineering & AI Workflow Articles", writing.blurb, "/blog");
 
 export default function BlogPage() {
   return (
     <PageShell>
+      <StructuredData data={{ "@graph": [
+        { "@type": "Blog", url: absoluteUrl("/blog"), name: "Adnan Sadar's Blog", description: writing.blurb, author: { "@type": "Person", "@id": personId, name: "Adnan Sadar", url: absoluteUrl("/#about") },
+          blogPost: articleRows.filter((article) => article.slug).map((article) => ({ "@type": "BlogPosting", headline: article.title, url: absoluteUrl(`/blog/${article.slug}`) })),
+        }, breadcrumbs([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog" }]),
+      ] }} />
       <SiteNav homeHref="/" />
       {/* `w-full` and the column: see the note in [slug]/page.tsx — without
           them this page's content sits inset from the nav, and a post that ran

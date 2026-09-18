@@ -10,6 +10,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import type { ArticleBlock, Figure, Rich } from "@/content/articles";
 import { cn } from "@/lib/utils";
+import { headingId } from "@/lib/seo";
 
 /*
   One width for the whole article — copy, headings and screenshots all run the
@@ -137,13 +138,13 @@ function Frame({ figure, priority }: { figure: Figure; priority?: boolean }) {
   );
 }
 
-function Block({ block }: { block: ArticleBlock }) {
+function Block({ block, index }: { block: ArticleBlock; index: number }) {
   switch (block.kind) {
     case "h2":
-      return <h2 className={H2}>{block.text}</h2>;
+      return <h2 id={headingId(block.text, index)} className={H2}>{block.text}</h2>;
 
     case "h3":
-      return <h3 className={H3}>{block.text}</h3>;
+      return <h3 id={headingId(block.text, index)} className={H3}>{block.text}</h3>;
 
     case "p":
       return (
@@ -220,7 +221,7 @@ export function ArticleBody({
 
       <div className={cover ? "mt-[clamp(36px,5vw,56px)]" : undefined}>
         {blocks.map((block, i) => (
-          <Block key={i} block={block} />
+          <Block key={i} block={block} index={i} />
         ))}
       </div>
     </div>
